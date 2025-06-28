@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     description: "We build apps for founders. Fast, affordable, and without wasting time.",
     images: ["/devindays-logo-final.png"],
   },
-    generator: 'v0.dev'
+    generator: 'beastaman.dev'
 }
 
 export default function RootLayout({

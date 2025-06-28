@@ -65,11 +65,13 @@ export function ProjectsSection() {
     }
   }, [isAutoPlaying])
 
-  const getVisibleProjects = () => {
-    if (typeof window === "undefined") return [projects[0]]
+  type ProjectWithIndex = (typeof projects)[number] & { index: number }
+
+  const getVisibleProjects = (): ProjectWithIndex[] => {
+    if (typeof window === "undefined") return [{ ...projects[0], index: 0 }]
 
     const visibleCount = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1
-    const visible = []
+    const visible: ProjectWithIndex[] = []
     for (let i = 0; i < visibleCount; i++) {
       const index = (currentIndex + i) % projects.length
       visible.push({ ...projects[index], index })
