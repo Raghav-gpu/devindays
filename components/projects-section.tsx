@@ -11,6 +11,13 @@ export function ProjectsSection() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
   const projects = [
+   {
+      name: "Bykea",
+      description: "Multi-purpose ride and delivery service with integrated booking and payment system.",
+      buildTime: "",
+      featured: false,
+      screenshots: ["/bykea-01.webp", "/bykea-02.webp"],
+    },
     {
       name: "FocusFlow",
       description: "Productivity app with Google Calendar sync, AI task assistant, and social accountability.",
@@ -19,13 +26,23 @@ export function ProjectsSection() {
       googlePlayLink: "https://play.google.com/store/apps/details?id=com.focusflow.focus",
       screenshots: ["/focusflow-01.webp", "/focusflow-02.webp"],
     },
-    {
-      name: "Qbex",
-      description:
-        "Finance quiz and test app to help students prep for entrance exams. Engaging UI with score analytics.",
+        {
+      name: "Moms Into Fitness",
+      description: "Fitness app focused on postpartum workouts and structured health programs for new mothers.",
       buildTime: "",
       featured: false,
-      screenshots: ["/qbex-01.webp", "/qbex-02.webp"],
+      screenshots: ["/mom-into-fitness-01.webp", "/mom-into-fitness-02.webp"],
+    },
+        {
+      name: "Baby Monitor 3G",
+      description:
+        "BABY MONITOR 3G is a universal video and audio baby monitor for your phone, tablet, or computer. Hear every noise, stream live video, and soothe your child remotely.",
+      buildTime: "",
+      featured: false,
+      screenshots: [
+        "/baby_01.webp", // Save your first image as this in /public
+        "/baby_02.webp", // Save your second image as this in /public
+      ],
     },
     {
       name: "Buddy – Money Budget Planner",
@@ -33,20 +50,6 @@ export function ProjectsSection() {
       buildTime: "",
       featured: false,
       screenshots: ["/buddy-01.webp", "/buddy-02.webp"],
-    },
-    {
-      name: "Bykea",
-      description: "Multi-purpose ride and delivery service with integrated booking and payment system.",
-      buildTime: "",
-      featured: false,
-      screenshots: ["/bykea-01.webp", "/bykea-02.webp"],
-    },
-    {
-      name: "Moms Into Fitness",
-      description: "Fitness app focused on postpartum workouts and structured health programs for new mothers.",
-      buildTime: "",
-      featured: false,
-      screenshots: ["/mom-into-fitness-01.webp", "/mom-into-fitness-02.webp"],
     },
   ]
 
