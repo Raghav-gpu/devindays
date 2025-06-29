@@ -32,7 +32,7 @@ export function Footer() {
               We build apps for founders. Fast, affordable, and without wasting time.
             </p>
             <p className="text-gray-300 text-base sm:text-lg lg:text-xl">
-              <strong>Email:</strong> hello@devindays.com
+              <strong>Email:</strong> raghavv.kaushik@gmail.com
             </p>
           </div>
 
