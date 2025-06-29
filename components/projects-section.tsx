@@ -24,7 +24,7 @@ export function ProjectsSection() {
       buildTime: "Built in 18 days",
       featured: true,
       googlePlayLink: "https://play.google.com/store/apps/details?id=com.focusflow.focus",
-      screenshots: ["/focusflow-01.webp", "/focusflow-02.webp"],
+      screenshots: ["/focusflow-01.png", "/focusflow-02.png"],
     },
         {
       name: "Moms Into Fitness",
