@@ -48,7 +48,7 @@ export function HeroSection() {
               variant="outline"
               size="lg"
               className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold bg-white/80 backdrop-blur-sm border-2 border-brand-300 hover:bg-white hover:border-brand-400 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 touch-manipulation"
-              onClick={() => window.open("https://calendly.com/raghavv-kaushik/30min", "_blank")}
+              onClick={() => window.open("https://calendar.app.google/5cutyfLNdYiNdChj8", "_blank")}
             >
               Book Free Call
             </Button>
