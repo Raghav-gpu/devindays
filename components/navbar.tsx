@@ -107,7 +107,7 @@ export function Navbar() {
               </Button>
               <Button
                 size={isScrolled ? "sm" : "default"}
-                onClick={() => window.open("https://calendly.com/raghavv-kaushik/30min", "_blank")}
+                onClick={() => window.open("https://calendar.app.google/5cutyfLNdYiNdChj8", "_blank")}
                 className={cn(
                   "bg-brand-400 hover:bg-brand-500 text-white transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap",
                   isScrolled ? "text-xs xl:text-sm px-3 xl:px-4 py-1.5 xl:py-2" : "text-sm xl:text-base",
