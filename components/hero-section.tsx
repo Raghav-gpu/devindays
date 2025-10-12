@@ -31,7 +31,7 @@ export function HeroSection() {
           </h1>
 
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-2">
-            Get a fully functional cross-platform app in 2–3 weeks — starting at $799. Ideal for MVPs, startups, and
+            Get a fully functional cross-platform app in 2–3 weeks starting at $799. Ideal for MVPs, startups, and
             small businesses.
           </p>
 
