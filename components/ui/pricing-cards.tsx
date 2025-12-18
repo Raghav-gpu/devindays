@@ -70,7 +70,7 @@ function Pricing() {
                     </p>
                   </div>
                   <Button variant="outline" className="gap-2 font-light text-gray-900 border-gray-300 hover:bg-gray-50 w-full" asChild>
-                    <Link href="https://wa.me/919354120990" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to build your MVP">
+                    <Link href="https://wa.link/fvdzf3" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to build your MVP">
                       Build My MVP <MoveRight className="w-4 h-4" aria-hidden="true" />
                     </Link>
                   </Button>
@@ -129,7 +129,7 @@ function Pricing() {
                     </p>
                   </div>
                   <Button className="gap-2 font-light bg-gray-900 hover:bg-gray-800 text-white w-full" asChild>
-                    <Link href="https://wa.me/919354120990" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to get a project quote">
+                    <Link href="https://wa.link/fvdzf3" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to get a project quote">
                       Get a Project Quote <MoveRight className="w-4 h-4" aria-hidden="true" />
                     </Link>
                   </Button>
@@ -183,7 +183,7 @@ function Pricing() {
                     </p>
                   </div>
                   <Button variant="outline" className="gap-2 font-light text-gray-900 border-gray-300 hover:bg-gray-50 w-full" asChild>
-                    <Link href="https://wa.me/919354120990" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to discuss your requirements">
+                    <Link href="https://wa.link/fvdzf3" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to discuss your requirements">
                       Discuss My Requirements <MoveRight className="w-4 h-4" aria-hidden="true" />
                     </Link>
                   </Button>

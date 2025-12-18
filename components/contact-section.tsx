@@ -71,7 +71,7 @@ export function ContactSection() {
                   asChild
                 >
                   <a
-                    href="https://wa.me/919354120990"
+                    href="https://wa.link/fvdzf3"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open WhatsApp to talk about your project"

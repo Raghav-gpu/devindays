@@ -13,7 +13,7 @@ export function CTASection() {
         </p>
         <div className="flex flex-col items-center gap-6">
           <Button size="lg" className="px-16 py-7 text-lg bg-gray-900 text-white hover:bg-gray-800 shadow-2xl" asChild>
-            <Link href="https://wa.me/919354120990" target="_blank">Build My MVP</Link>
+            <Link href="https://wa.link/fvdzf3" target="_blank">Build My MVP</Link>
           </Button>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-gray-600 font-light">
             <span>Response within 2–4 hours</span>
