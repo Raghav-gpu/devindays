@@ -26,13 +26,22 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "https://devindays.com",
     siteName: "DevInDays",
-    title: "DevInDays - Fast App Development for Founders",
-    description: "Build your MVP in 2–3 weeks starting at ₹40,000. Fast, affordable app development for founders.",
+    title: "DevInDays - Build Your MVP in 2–3 Weeks",
+    description: "Fast, affordable app development for founders. Get a fully functional cross-platform app starting at ₹40,000. Clear scope, fixed timelines, full code ownership.",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "DevInDays - Fast App Development for Founders",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DevInDays - Fast App Development for Founders",
-    description: "Build your MVP in 2–3 weeks starting at ₹40,000. Fast, affordable app development for founders.",
+    title: "DevInDays - Build Your MVP in 2–3 Weeks",
+    description: "Fast, affordable app development for founders. Get a fully functional cross-platform app starting at ₹40,000.",
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
