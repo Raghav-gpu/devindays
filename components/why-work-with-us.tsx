@@ -1,56 +1,49 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Clock, Code, Shield, DollarSign, Globe } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+const benefits = [
+  {
+    title: "We're not an agency factory",
+    description: "We take limited projects so timelines don't slip.",
+  },
+  {
+    title: "We think like founders",
+    description: "We help you decide what not to build.",
+  },
+  {
+    title: "Speed without shortcuts",
+    description: "Fast builds, but production-ready code.",
+  },
+  {
+    title: "You talk directly to builders",
+    description: "No account managers. No miscommunication.",
+  },
+];
 
 export function WhyWorkWithUs() {
-  const benefits = [
-    {
-      icon: <Clock className="h-8 w-8 text-brand-400" />,
-      title: "Fast delivery",
-      description: "7 to 21 days",
-    },
-    {
-      icon: <Code className="h-8 w-8 text-brand-400" />,
-      title: "Clean, scalable code",
-      description: "Built for growth",
-    },
-    {
-      icon: <Shield className="h-8 w-8 text-brand-400" />,
-      title: "Full code ownership",
-      description: "& post-launch support",
-    },
-    {
-      icon: <DollarSign className="h-8 w-8 text-brand-400" />,
-      title: "Transparent pricing",
-      description: "No hidden costs",
-    },
-    {
-      icon: <Globe className="h-8 w-8 text-brand-400" />,
-      title: "Trusted globally",
-      description: "By founders worldwide",
-    },
-  ]
-
   return (
-    <section id="why-us" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Why Work With Us</h2>
+    <section id="why-us" className="py-28 px-6 lg:px-8 bg-[#FAFAFA]">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
+            Why Founders Choose DevInDays
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {benefits.map((benefit, index) => (
-            <Card key={index} className="text-center hover:shadow-lg transition-shadow border-brand-200">
+            <Card key={index} className="border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-xl bg-white shadow-md">
               <CardHeader>
-                <div className="flex justify-center mb-4">{benefit.icon}</div>
-                <CardTitle className="text-lg">{benefit.title}</CardTitle>
+                <CardTitle className="text-xl font-normal text-gray-900">{benefit.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base">{benefit.description}</CardDescription>
+                <CardDescription className="text-base text-gray-600 font-light leading-relaxed">
+                  {benefit.description}
+                </CardDescription>
               </CardContent>
             </Card>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

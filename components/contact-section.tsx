@@ -1,160 +1,95 @@
-"use client"
-
-import type React from "react"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { MessageCircle } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function ContactSection() {
-  const [formData, setFormData] = useState({
-    email: "",
-    whatsapp: "",
-    plan: "",
-    projectIdea: "",
-    reference: null as File | null,
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // In a real app, you'd send this to your backend
-    alert("Thank you for your submission! We'll get back to you soon.")
-    console.log("Form submitted:", formData)
-  }
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null
-    setFormData((prev) => ({ ...prev, reference: file }))
-  }
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-brand-50">
-      <div className="container mx-auto max-w-4xl">
+    <section id="contact" className="py-32 px-6 lg:px-8 bg-[#FAFAFA]">
+      <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Get a Quote</h2>
-          <p className="text-xl text-gray-600">Tell us about your project and we'll get back to you within 24 hours</p>
+          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
+            Get a Quote
+          </h2>
+          <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto leading-relaxed">
+            Tell us about your project. We'll send you a quote within 24 hours.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Contact Form */}
-          <Card className="lg:col-span-2 border-0 shadow-xl bg-white/90 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-brand-700">Project Details</CardTitle>
-              <CardDescription>Fill out the form below and we'll prepare a custom quote for you</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                    className="border-brand-300 focus:border-brand-400"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="whatsapp">WhatsApp Number</Label>
-                  <Input
-                    id="whatsapp"
-                    type="tel"
-                    placeholder="+91 93541 20990"
-                    value={formData.whatsapp}
-                    onChange={(e) => handleInputChange("whatsapp", e.target.value)}
-                    className="border-brand-300 focus:border-brand-400"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="plan">Select a Plan *</Label>
-                  <Select onValueChange={(value) => handleInputChange("plan", value)} required>
-                    <SelectTrigger className="border-brand-300 focus:border-brand-400">
-                      <SelectValue placeholder="Choose your plan" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="mvp">MVP Launch - $799</SelectItem>
-                      <SelectItem value="standard">Standard Build - $1,999</SelectItem>
-                      <SelectItem value="custom">Custom Build - Quote-Based</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <Label htmlFor="projectIdea">Project Idea / Brief *</Label>
-                  <Textarea
-                    id="projectIdea"
-                    placeholder="Tell us about your app idea, target audience, key features, and any specific requirements..."
-                    className="min-h-[120px] border-brand-300 focus:border-brand-400"
-                    required
-                    value={formData.projectIdea}
-                    onChange={(e) => handleInputChange("projectIdea", e.target.value)}
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="reference">Upload Reference (Optional)</Label>
-                  <Input
-                    id="reference"
-                    type="file"
-                    accept="image/*,.pdf,.doc,.docx"
-                    onChange={handleFileChange}
-                    className="border-brand-300 focus:border-brand-400"
-                  />
-                  <p className="text-sm text-gray-500 mt-1">Upload wireframes, designs, or reference materials</p>
-                </div>
-
-                <Button type="submit" className="w-full bg-brand-400 hover:bg-brand-500 text-white" size="lg">
-                  Send Details
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-
-          {/* WhatsApp CTA */}
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center text-brand-700">
-                <MessageCircle className="w-5 h-5 mr-2 text-green-600" />
-                Prefer chatting directly?
+        <div className="max-w-2xl mx-auto">
+          <Card className="border-gray-200 bg-white shadow-xl">
+            <CardHeader className="text-center pb-6">
+              <CardTitle className="text-2xl font-normal text-gray-900 mb-2">
+                Let's Discuss Your Project
               </CardTitle>
-              <CardDescription>Get instant responses on WhatsApp</CardDescription>
+              <CardDescription className="text-gray-600 text-base">
+                Get a clear quote and timeline. No surprises, no vendor lock-in.
+              </CardDescription>
             </CardHeader>
-            <CardContent>
-              <Button
-                variant="outline"
-                className="w-full border-green-600 text-green-600 hover:bg-green-50 bg-transparent"
-                onClick={() => window.open("https://wa.me/919354120990", "_blank")}
-              >
-                <MessageCircle className="w-4 h-4 mr-2" />
-                Chat on WhatsApp
-              </Button>
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900 mb-1">Quick Response</p>
+                    <p className="text-sm text-gray-600 font-light">
+                      We'll get back to you within 2-4 hours during business hours
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900 mb-1">Clear Quote</p>
+                    <p className="text-sm text-gray-600 font-light">
+                      Detailed breakdown of scope, timeline, and pricing within 24 hours
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900 mb-1">Direct Access</p>
+                    <p className="text-sm text-gray-600 font-light">
+                      Talk directly with the builder, not a sales team
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-              <div className="mt-6 space-y-4 text-sm text-gray-600">
-                <div>
-                  <strong>Response Time:</strong>
-                  <p>Within 2-4 hours during business hours</p>
-                </div>
-                <div>
-                  <strong>What to expect:</strong>
-                  <p>Quick project discussion, timeline, and next steps</p>
-                </div>
+              <div className="pt-4 border-t border-gray-200">
+                <Button
+                  size="lg"
+                  className="w-full bg-gray-900 text-white hover:bg-gray-800 text-lg py-6"
+                  asChild
+                >
+                  <a
+                    href="https://wa.me/919354120990"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Open WhatsApp to talk about your project"
+                  >
+                    Talk on WhatsApp
+                  </a>
+                </Button>
+                <p className="text-center text-sm text-gray-500 font-light mt-4">
+                  Or email us at{" "}
+                  <a href="mailto:raghav@vaydenfoundry.com" className="text-gray-900 hover:underline">
+                    raghav@vaydenfoundry.com
+                  </a>
+                </p>
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
     </section>
-  )
+  );
 }

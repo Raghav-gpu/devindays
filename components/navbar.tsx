@@ -1,210 +1,197 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
-import { cn } from "@/lib/utils"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { smoothScrollTo } from "@/lib/smooth-scroll";
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-    setIsMobileMenuOpen(false)
-  }
-
-  const navLinks = [
-    { label: "What We Do", id: "what-we-do" },
-    { label: "Pricing", id: "pricing" },
-    { label: "How It Works", id: "how-it-works" },
-    { label: "Projects", id: "projects" },
-    { label: "Why Us", id: "why-us" },
-    { label: "Contact", id: "contact" },
-  ]
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out">
-      <div className="container mx-auto px-2 sm:px-4 lg:px-8">
-        <div
-          className={cn(
-            "transition-all duration-500 ease-in-out",
-            isScrolled
-              ? "mt-2 sm:mt-3 mx-2 sm:mx-6 lg:mx-12 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl"
-              : "mt-0 mx-0 rounded-none bg-transparent border-none shadow-none",
-          )}
-        >
-          <div
-            className={cn(
-              "flex items-center justify-between px-3 sm:px-4 lg:px-6",
-              isScrolled ? "h-16 sm:h-14" : "h-20 sm:h-20",
-            )}
-          >
-            {/* Logo */}
-            <div className="flex-shrink-0 flex items-center">
-              <img
-                src="/devindays-logo-header.png"
-                alt="DevInDays"
-                className={cn(
-                  "transition-all duration-300 hover:scale-105",
-                  isScrolled
-                    ? "h-12 sm:h-10 md:h-12 w-auto" // Mobile: h-12, SM: h-10, MD+: h-12
-                    : "h-16 sm:h-20 md:h-20 w-auto", // Mobile: h-16, SM+: h-20
-                )}
-              />
-            </div>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FAFAFA]/90 backdrop-blur-md border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="text-xl font-semibold text-gray-900">
+            DevInDays
+          </Link>
+          
+          <nav className="hidden md:flex items-center space-x-8" aria-label="Main navigation">
+            <a 
+              href="#what-we-do" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("what-we-do");
+              }}
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light" 
+              aria-label="Navigate to What We Do section"
+            >
+              What We Do
+            </a>
+            <a 
+              href="#pricing" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("pricing");
+              }}
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light" 
+              aria-label="Navigate to Pricing section"
+            >
+              Pricing
+            </a>
+            <a 
+              href="#how-it-works" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("how-it-works");
+              }}
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light" 
+              aria-label="Navigate to How It Works section"
+            >
+              How It Works
+            </a>
+            <a 
+              href="#projects" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("projects");
+              }}
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light" 
+              aria-label="Navigate to Projects section"
+            >
+              Projects
+            </a>
+            <a 
+              href="#why-us" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("why-us");
+              }}
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light" 
+              aria-label="Navigate to Why Us section"
+            >
+              Why Us
+            </a>
+            <a 
+              href="#contact" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("contact");
+              }}
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-light" 
+              aria-label="Navigate to Contact section"
+            >
+              Contact
+            </a>
+          </nav>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:block">
-              <div
-                className={cn(
-                  "flex items-baseline transition-all duration-300",
-                  isScrolled ? "ml-4 xl:ml-6 space-x-3 xl:space-x-4" : "ml-8 xl:ml-10 space-x-6 xl:space-x-8",
-                )}
-              >
-                {navLinks.map((link) => (
-                  <button
-                    key={link.id}
-                    onClick={() => scrollToSection(link.id)}
-                    className={cn(
-                      "font-medium transition-all duration-300 rounded-lg hover:bg-white/10 whitespace-nowrap",
-                      isScrolled
-                        ? "px-2 xl:px-3 py-1.5 text-xs xl:text-sm text-gray-800 hover:text-brand-400"
-                        : "px-3 py-2 text-sm xl:text-base text-gray-700 hover:text-brand-400",
-                    )}
-                  >
-                    {link.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Desktop CTA Buttons */}
-            <div className="hidden lg:flex items-center space-x-2 xl:space-x-3">
-              <Button
-                variant="outline"
-                size={isScrolled ? "sm" : "default"}
-                onClick={() => scrollToSection("contact")}
-                className={cn(
-                  "transition-all duration-300 backdrop-blur-sm whitespace-nowrap",
-                  isScrolled
-                    ? "border-brand-400/50 text-brand-400 hover:bg-brand-400/10 bg-white/20 text-xs xl:text-sm px-3 xl:px-4 py-1.5 xl:py-2"
-                    : "border-brand-300 text-brand-400 hover:bg-brand-50 bg-white/80 text-sm xl:text-base",
-                )}
-              >
-                Get a Quote
-              </Button>
-              <Button
-                size={isScrolled ? "sm" : "default"}
-                onClick={() => window.open("https://calendar.app.google/5cutyfLNdYiNdChj8", "_blank")}
-                className={cn(
-                  "bg-brand-400 hover:bg-brand-500 text-white transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap",
-                  isScrolled ? "text-xs xl:text-sm px-3 xl:px-4 py-1.5 xl:py-2" : "text-sm xl:text-base",
-                )}
-              >
-                Book Free Call
-              </Button>
-            </div>
-
-            {/* Mobile/Tablet CTA and Menu */}
-            <div className="flex lg:hidden items-center space-x-2 sm:space-x-3">
-              {/* Mobile CTA Buttons */}
-              <div className="hidden sm:flex items-center space-x-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => scrollToSection("contact")}
-                  className={cn(
-                    "transition-all duration-300 backdrop-blur-sm",
-                    isScrolled
-                      ? "border-brand-400/50 text-brand-400 hover:bg-brand-400/10 bg-white/20 text-xs px-2 py-1"
-                      : "border-brand-300 text-brand-400 hover:bg-brand-50 bg-white/80 text-xs px-3 py-1.5",
-                  )}
-                >
-                  Quote
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={() => window.open("https://calendly.com/raghavv-kaushik/30min", "_blank")}
-                  className={cn(
-                    "bg-brand-400 hover:bg-brand-500 text-white transition-all duration-300 hover:scale-105 shadow-lg",
-                    isScrolled ? "text-xs px-2 py-1" : "text-xs px-3 py-1.5",
-                  )}
-                >
-                  Call
-                </Button>
-              </div>
-
-              {/* Mobile menu button */}
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={cn(
-                  "transition-all duration-300 p-2",
-                  isScrolled ? "hover:bg-white/10 h-8 w-8" : "hover:bg-gray-100 h-10 w-10",
-                )}
-              >
-                {isMobileMenuOpen ? (
-                  <X className={cn(isScrolled ? "h-4 w-4" : "h-5 w-5")} />
-                ) : (
-                  <Menu className={cn(isScrolled ? "h-4 w-4" : "h-5 w-5")} />
-                )}
-              </Button>
-            </div>
+          <div className="hidden md:flex items-center">
+            <Button size="sm" className="bg-gray-900 text-white hover:bg-gray-800" asChild>
+              <Link href="https://wa.me/919354120990" target="_blank">Build My MVP</Link>
+            </Button>
           </div>
 
-          {/* Mobile Navigation */}
-          {isMobileMenuOpen && (
-            <div className="lg:hidden border-t border-white/20">
-              <div
-                className={cn(
-                  "px-3 sm:px-4 pt-3 pb-4 space-y-2 bg-white/5 backdrop-blur-sm",
-                  isScrolled ? "rounded-b-lg sm:rounded-b-xl mx-1 sm:mx-2" : "rounded-b-none",
-                )}
-              >
-                {navLinks.map((link) => (
-                  <button
-                    key={link.id}
-                    onClick={() => scrollToSection(link.id)}
-                    className="text-gray-700 hover:text-brand-400 block px-4 py-3 text-base font-medium w-full text-left rounded-lg hover:bg-white/10 transition-all duration-300 touch-manipulation"
-                  >
-                    {link.label}
-                  </button>
-                ))}
-
-                {/* Mobile CTA Buttons - Always visible in mobile menu */}
-                <div className="pt-4 space-y-3 border-t border-white/20">
-                  <Button
-                    variant="outline"
-                    className="w-full border-brand-400/50 text-brand-400 hover:bg-brand-400/10 bg-white/20 backdrop-blur-sm text-sm py-3 touch-manipulation"
-                    onClick={() => scrollToSection("contact")}
-                  >
-                    Get a Quote
-                  </Button>
-                  <Button
-                    className="w-full bg-brand-400 hover:bg-brand-500 text-white text-sm py-3 touch-manipulation"
-                    onClick={() => window.open("https://calendly.com/raghavv-kaushik/30min", "_blank")}
-                  >
-                    Book Free Call
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {isOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
+
+        {isOpen && (
+          <nav id="mobile-menu" className="md:hidden py-4 space-y-4 border-t border-gray-100" aria-label="Mobile navigation">
+            <a 
+              href="#what-we-do" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("what-we-do");
+                setIsOpen(false);
+              }}
+              className="block text-sm text-gray-600 hover:text-gray-900 font-light"
+            >
+              What We Do
+            </a>
+            <a 
+              href="#pricing" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("pricing");
+                setIsOpen(false);
+              }}
+              className="block text-sm text-gray-600 hover:text-gray-900 font-light"
+            >
+              Pricing
+            </a>
+            <a 
+              href="#how-it-works" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("how-it-works");
+                setIsOpen(false);
+              }}
+              className="block text-sm text-gray-600 hover:text-gray-900 font-light"
+            >
+              How It Works
+            </a>
+            <a 
+              href="#projects" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("projects");
+                setIsOpen(false);
+              }}
+              className="block text-sm text-gray-600 hover:text-gray-900 font-light"
+            >
+              Projects
+            </a>
+            <a 
+              href="#why-us" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("why-us");
+                setIsOpen(false);
+              }}
+              className="block text-sm text-gray-600 hover:text-gray-900 font-light"
+            >
+              Why Us
+            </a>
+            <a 
+              href="#contact" 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo("contact");
+                setIsOpen(false);
+              }}
+              className="block text-sm text-gray-600 hover:text-gray-900 font-light"
+            >
+              Contact
+            </a>
+            <div className="pt-4">
+              <Button size="sm" className="w-full bg-gray-900 text-white hover:bg-gray-800" asChild>
+                <Link href="https://wa.me/919354120990" target="_blank" aria-label="Open WhatsApp to build your MVP">Build My MVP</Link>
+              </Button>
+            </div>
+          </nav>
+        )}
       </div>
     </nav>
-  )
+  );
 }
