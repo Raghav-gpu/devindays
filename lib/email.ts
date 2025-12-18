@@ -1,8 +1,14 @@
 import { Resend } from "resend";
 import nodemailer from "nodemailer";
 
-// Resend configuration
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization for Resend (only when needed)
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY is not configured");
+  }
+  return new Resend(apiKey);
+}
 
 export async function sendEmailWithResend({
   to,
@@ -16,6 +22,7 @@ export async function sendEmailWithResend({
   from?: string;
 }) {
   try {
+    const resend = getResendClient();
     const { data, error } = await resend.emails.send({
       from,
       to: Array.isArray(to) ? to : [to],
@@ -34,16 +41,18 @@ export async function sendEmailWithResend({
   }
 }
 
-// Nodemailer configuration
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || "587"),
-  secure: process.env.SMTP_SECURE === "true",
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD,
-  },
-});
+// Lazy initialization for Nodemailer (only when needed)
+function getNodemailerTransporter() {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: parseInt(process.env.SMTP_PORT || "587"),
+    secure: process.env.SMTP_SECURE === "true",
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD,
+    },
+  });
+}
 
 export async function sendEmailWithNodemailer({
   to,
@@ -57,6 +66,7 @@ export async function sendEmailWithNodemailer({
   from?: string;
 }) {
   try {
+    const transporter = getNodemailerTransporter();
     const info = await transporter.sendMail({
       from,
       to: Array.isArray(to) ? to.join(", ") : to,
