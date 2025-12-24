@@ -31,7 +31,7 @@ export function HeroSection() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
           <Button size="lg" className="px-12 bg-gray-900 text-white hover:bg-gray-800 shadow-xl" asChild>
-            <Link href="https://wa.link/fvdzf3" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to build your MVP">Build My MVP</Link>
+            <Link href="https://wa.link/lw7sw2" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to build your MVP">Build My MVP</Link>
           </Button>
           <Button 
             size="lg" 
