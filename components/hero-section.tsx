@@ -46,14 +46,6 @@ export function HeroSection() {
             See How It Works
           </Button>
         </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-500 font-light">
-          <span>Limited projects per month</span>
-          <span>•</span>
-          <span>Direct access to builder</span>
-          <span>•</span>
-          <span>Response within 2–4 hours</span>
-        </div>
       </div>
     </section>
   );
