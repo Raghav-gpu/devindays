@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/carousel";
 import type { Project } from "@/constants/projects";
 import { cn } from "@/lib/utils";
+import WheelGesturesPlugin from "embla-carousel-wheel-gestures";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -34,7 +35,20 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
   const [current, setCurrent] = useState(0);
   const [slideCount, setSlideCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [enableWheelGestures, setEnableWheelGestures] = useState(false);
   const [loadedSlides, setLoadedSlides] = useState<Set<number>>(() => new Set());
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const updateWheelGestures = () => setEnableWheelGestures(mediaQuery.matches);
+
+    updateWheelGestures();
+    mediaQuery.addEventListener("change", updateWheelGestures);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateWheelGestures);
+    };
+  }, []);
 
   useEffect(() => {
     const node = containerRef.current;
@@ -106,6 +120,11 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
       <div className="relative overflow-hidden">
         <Carousel
           setApi={setApi}
+          plugins={
+            isVisible && enableWheelGestures
+              ? [WheelGesturesPlugin({ forceWheelAxis: "x" })]
+              : []
+          }
           opts={{
             align: "center",
             loop: true,
