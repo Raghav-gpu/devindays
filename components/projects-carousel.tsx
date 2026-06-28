@@ -44,7 +44,7 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
 
   return (
     <div className="relative">
-      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+      <div className="relative overflow-hidden">
         <Carousel
           setApi={setApi}
           opts={{

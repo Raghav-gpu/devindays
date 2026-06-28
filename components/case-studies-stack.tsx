@@ -14,14 +14,14 @@ const PIN_VIEWPORT_RATIO = 1.3;
 
 function CaseStudiesHeader() {
   return (
-    <div className="text-center mb-12 md:mb-16">
+    <div className="mb-[clamp(40px,6vw,64px)] text-center">
       <Badge variant="outline" className="mb-4 font-light text-gray-900 border-gray-300">
         Case Studies
       </Badge>
-      <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
+      <h2 className="mb-4 font-light text-gray-900 text-[clamp(2.125rem,4vw,3.5rem)] leading-tight">
         Apps we shipped fast
       </h2>
-      <p className="text-lg md:text-xl text-gray-600 font-light max-w-2xl mx-auto">
+      <p className="mx-auto max-w-2xl font-light text-gray-600 text-[clamp(1rem,1.5vw,1.25rem)] leading-relaxed">
         Real products built for founders — from MVP to live users.
       </p>
     </div>
@@ -30,12 +30,12 @@ function CaseStudiesHeader() {
 
 function CaseStudiesStaticList() {
   return (
-    <section className="py-24 px-6 lg:px-8 bg-white">
-      <div className="max-w-[1400px] mx-auto">
+    <section className="bg-white px-6 py-[clamp(80px,10vw,120px)] md:px-8">
+      <div className="mx-auto w-full max-w-[1400px]">
         <CaseStudiesHeader />
-        <div className="space-y-10">
+        <div className="flex flex-col gap-[clamp(32px,5vw,48px)]">
           {caseStudies.map((caseStudy) => (
-            <CaseStudyCard key={caseStudy.id} caseStudy={caseStudy} variant="mobile" />
+            <CaseStudyCard key={caseStudy.id} caseStudy={caseStudy} />
           ))}
         </div>
       </div>
@@ -59,7 +59,7 @@ function CaseStudiesStory() {
 
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 768px)", () => {
+    mm.add("(min-width: 1024px)", () => {
       if (
         !desktopTrackRef.current ||
         !desktopPinRef.current ||
@@ -136,7 +136,7 @@ function CaseStudiesStory() {
       }
     });
 
-    mm.add("(max-width: 767px)", () => {
+    mm.add("(max-width: 1023px)", () => {
       const cards = mobileCardRefs.current.filter(Boolean) as HTMLDivElement[];
 
       cards.forEach((card) => {
@@ -175,18 +175,18 @@ function CaseStudiesStory() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-white">
-      <div className="hidden md:block">
-        <div className="px-6 lg:px-8 pt-24 pb-10">
-          <div className="max-w-[1400px] mx-auto">
+    <section ref={sectionRef} className="overflow-x-clip bg-white">
+      <div className="hidden lg:block">
+        <div className="px-6 pt-[clamp(80px,10vw,120px)] pb-[clamp(24px,4vw,40px)] md:px-8">
+          <div className="mx-auto w-full max-w-[1400px]">
             <CaseStudiesHeader />
           </div>
         </div>
 
         <div ref={desktopTrackRef} className="relative">
           <div ref={desktopPinRef} className="relative h-svh w-full overflow-hidden">
-            <div className="flex h-full w-full items-center justify-center px-[4vw]">
-              <div className="relative h-[78vh] min-h-[650px] w-[90vw] max-w-[1400px]">
+            <div className="flex h-full w-full items-center justify-center px-[clamp(16px,4vw,48px)]">
+              <div className="relative h-[min(78vh,820px)] min-h-[520px] w-full max-w-[1180px] min-[1400px]:max-w-[1400px] xl:min-h-[580px] min-[1400px]:min-h-[650px]">
                 {caseStudies.map((caseStudy, index) => (
                   <div
                     key={caseStudy.id}
@@ -196,11 +196,7 @@ function CaseStudiesStory() {
                     className="absolute inset-0 will-change-transform"
                     style={{ zIndex: index + 1 }}
                   >
-                    <CaseStudyCard
-                      caseStudy={caseStudy}
-                      variant="hero"
-                      className="h-full w-full"
-                    />
+                    <CaseStudyCard caseStudy={caseStudy} className="h-full w-full max-w-none" />
                   </div>
                 ))}
               </div>
@@ -208,13 +204,13 @@ function CaseStudiesStory() {
           </div>
         </div>
 
-        <div className="h-24" aria-hidden="true" />
+        <div className="h-[clamp(48px,6vw,96px)]" aria-hidden="true" />
       </div>
 
-      <div className="md:hidden py-24 px-6">
-        <div className="max-w-[1400px] mx-auto">
+      <div className="px-6 py-[clamp(80px,10vw,120px)] md:px-8 lg:hidden">
+        <div className="mx-auto w-full max-w-[900px]">
           <CaseStudiesHeader />
-          <div className="space-y-12">
+          <div className="flex flex-col gap-[clamp(32px,5vw,48px)]">
             {caseStudies.map((caseStudy, index) => (
               <div
                 key={caseStudy.id}
@@ -223,7 +219,7 @@ function CaseStudiesStory() {
                 }}
                 className="will-change-transform"
               >
-                <CaseStudyCard caseStudy={caseStudy} variant="mobile" />
+                <CaseStudyCard caseStudy={caseStudy} />
               </div>
             ))}
           </div>

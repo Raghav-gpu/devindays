@@ -3,13 +3,13 @@ import { projects } from "@/constants/projects";
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-28 px-6 lg:px-8 bg-[#FAFAFA]">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
+    <section id="projects" className="bg-[#FAFAFA] px-6 py-[clamp(80px,10vw,112px)] lg:px-8">
+      <div className="mx-auto w-full max-w-7xl">
+        <div className="mb-[clamp(40px,6vw,64px)] text-center">
+          <h2 className="mb-4 font-light text-gray-900 text-[clamp(2.125rem,4vw,3rem)] leading-tight">
             Real Products We&apos;ve Shipped
           </h2>
-          <p className="text-lg text-gray-600 font-light max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl font-light text-gray-600 text-[clamp(1rem,1.5vw,1.125rem)] leading-relaxed">
             See what we&apos;ve built for founders like you. Real apps, real users, real success
             stories.
           </p>
@@ -17,8 +17,8 @@ export function ProjectsSection() {
 
         <ProjectsCarousel projects={projects} />
 
-        <div className="text-center mt-12">
-          <p className="text-sm text-gray-600 italic font-light">
+        <div className="mt-[clamp(32px,5vw,48px)] text-center">
+          <p className="text-sm italic font-light text-gray-600">
             Live demo of apps available on request
           </p>
         </div>

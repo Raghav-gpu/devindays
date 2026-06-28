@@ -64,7 +64,7 @@ export function Navbar() {
         className={cn(
           "transition-all duration-300 ease-in-out",
           isScrolled
-            ? "mx-auto max-w-5xl rounded-2xl border border-gray-200/80 bg-white/95 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
+            ? "mx-auto max-w-5xl rounded-2xl border border-gray-200/80 bg-white/55 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
             : "w-full border-b border-gray-200 bg-[#FAFAFA]/90 backdrop-blur-md"
         )}
       >

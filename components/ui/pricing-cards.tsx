@@ -1,207 +1,275 @@
-import { Check, MoveRight } from "lucide-react";
+"use client";
+
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Check, MoveRight } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+
+type PricingFeature = {
+  text: string;
+};
+
+type PricingTier = {
+  title: string;
+  description: string;
+  price: string;
+  priceSuffix?: string;
+  features: PricingFeature[];
+  bestFor: string;
+  ctaLabel: string;
+  ctaHref: string;
+  ctaAriaLabel: string;
+  highlighted?: boolean;
+  badge?: string;
+};
+
+const pricingTiers: PricingTier[] = [
+  {
+    title: "MVP Build",
+    description: "For founders validating core mechanics",
+    price: "₹80,000",
+    priceSuffix: "starting",
+    features: [
+      { text: "Cross-platform architecture (iOS & Android)" },
+      { text: "Core user flow & state management" },
+      { text: "Automated CI/CD deployment pipelines" },
+      { text: "3–4 week rapid delivery cycle" },
+      { text: "Complete IP and codebase ownership" },
+    ],
+    bestFor: "market validation, seed-stage product demos, and core feature testing",
+    ctaLabel: "Initiate MVP Build",
+    ctaHref: "https://wa.me/919315735371",
+    ctaAriaLabel: "Open WhatsApp to initiate MVP build",
+  },
+  {
+    title: "Full App Build",
+    description: "For scalable consumer apps, marketplaces, and transactional platforms",
+    price: "₹2,00,000",
+    priceSuffix: "starting",
+    features: [
+      { text: "Production-grade backend infrastructure (Node.js/Supabase)" },
+      { text: "Complex state management & real-time WebSockets" },
+      { text: "Secure payment routing & third-party API integrations" },
+      { text: "Dedicated admin control dashboard" },
+      { text: "Post-deployment SLA and stability support" },
+    ],
+    bestFor:
+      "consumer social apps (e.g., dating/matching mechanics), on-demand service platforms, and revenue-generating products",
+    ctaLabel: "Request Technical Review",
+    ctaHref: "https://wa.me/919315735371",
+    ctaAriaLabel: "Open WhatsApp to request a technical review",
+    highlighted: true,
+    badge: "Most Popular",
+  },
+  {
+    title: "Advanced / Custom Systems",
+    description: "For heavy infrastructure, multi-sided platforms, and AI-integrated systems",
+    price: "Custom",
+    priceSuffix: "pricing",
+    features: [
+      { text: "Multi-app ecosystems (e.g., Customer App + Provider App + Admin)" },
+      { text: "Microservices, geolocation tracking & background worker queues" },
+      { text: "Applied AI & matching algorithm integrations" },
+      { text: "Legacy system refactoring & migration" },
+      { text: "Long-term architectural consulting" },
+    ],
+    bestFor:
+      "large-scale service aggregators (e.g., Urban Company models), high-concurrency consumer networks, and complex enterprise automation",
+    ctaLabel: "Discuss Architecture",
+    ctaHref: "https://wa.me/919315735371",
+    ctaAriaLabel: "Open WhatsApp to discuss architecture",
+  },
+];
+
+function FadeIn({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+
+    if (!node) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "transition-all duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100",
+        visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
+        className
+      )}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function PricingFeatureItem({ text }: PricingFeature) {
+  return (
+    <div className="flex items-start gap-2.5">
+      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-slate-100">
+        <Check className="h-3 w-3 text-slate-900" strokeWidth={2.5} aria-hidden="true" />
+      </span>
+      <p className="max-w-[34ch] text-[15px] leading-[1.5] text-slate-700">{text}</p>
+    </div>
+  );
+}
+
+function PricingTierCard({ tier, index }: { tier: PricingTier; index: number }) {
+  return (
+    <FadeIn delay={index * 100} className="h-full">
+      <div
+        className={cn(
+          "group relative flex h-full min-h-0 max-h-[700px] flex-col rounded-[20px] border border-slate-200/80 bg-white p-8 shadow-[0_12px_40px_rgba(15,23,42,0.08)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(15,23,42,0.12)] motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+          tier.highlighted &&
+            "z-10 border-slate-700/80 bg-[#FCFCFD] shadow-[0_16px_48px_rgba(15,23,42,0.12),0_0_0_1px_rgba(15,23,42,0.04)] hover:shadow-[0_24px_60px_rgba(15,23,42,0.16),0_0_32px_rgba(15,23,42,0.06)] lg:scale-[1.03] lg:hover:-translate-y-1.5 border-2"
+        )}
+      >
+        {tier.badge && (
+          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+            <Badge className="rounded-full border border-slate-900/10 bg-slate-900 px-3 py-1 text-[11px] font-medium tracking-wide text-white shadow-sm">
+              {tier.badge}
+            </Badge>
+          </div>
+        )}
+
+        <div className={cn("flex h-full flex-col", tier.badge && "pt-2")}>
+          <div>
+            <h3 className="text-[clamp(1.625rem,2vw,2.625rem)] font-semibold leading-tight text-slate-900">
+              {tier.title}
+            </h3>
+            <p className="mt-4 line-clamp-2 max-w-[28ch] text-base leading-relaxed text-slate-500">
+              {tier.description}
+            </p>
+          </div>
+
+          <div className="mt-5 flex items-end gap-2">
+            <span className="text-[clamp(2.375rem,2.5vw,1.75rem)] font-bold leading-none tracking-tight text-gray-900">
+              {tier.price}
+            </span>
+            {tier.priceSuffix && (
+              <span className="pb-1 text-sm font-medium text-slate-400">{tier.priceSuffix}</span>
+            )}
+          </div>
+
+          <div className="mt-5 flex flex-col gap-[14px]">
+            {tier.features.map((feature) => (
+              <PricingFeatureItem key={feature.text} text={feature.text} />
+            ))}
+          </div>
+
+          <div className="mt-auto pt-5">
+            <div className="rounded-xl bg-slate-50 px-3.5 py-3">
+              <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+                Best for
+              </p>
+              <p className="text-[14px] leading-relaxed text-slate-600">{tier.bestFor}</p>
+            </div>
+
+            <Button
+              variant={tier.highlighted ? "default" : "outline"}
+              className={cn(
+                "mt-4 h-12 w-full rounded-2xl text-[15px] font-medium transition-all duration-300",
+                tier.highlighted
+                  ? "bg-slate-900 text-white hover:bg-slate-800"
+                  : "border-slate-200 bg-white text-slate-900 hover:border-slate-300 hover:bg-slate-50"
+              )}
+              asChild
+            >
+              <Link
+                href={tier.ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={tier.ctaAriaLabel}
+                className="inline-flex items-center justify-center gap-2"
+              >
+                {tier.ctaLabel}
+                <MoveRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </FadeIn>
+  );
+}
 
 function Pricing() {
   return (
-    <div className="w-full py-20 lg:py-40">
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="flex text-center justify-center items-center gap-4 flex-col">
-          <div className="flex gap-2 flex-col">
-            <h2 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-center font-light text-gray-900">
-              Pricing
-            </h2>
-            <p className="text-lg leading-relaxed tracking-tight text-gray-600 max-w-2xl text-center font-light">
-              Clear pricing. No surprises. Most projects fall into one of the options below.
-            </p>
-          </div>
-          <div className="grid pt-20 text-left grid-cols-1 md:grid-cols-3 w-full gap-6 max-w-6xl mx-auto">
-            {/* MVP Build */}
-            <Card className="w-full rounded-md border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-xl bg-white shadow-md">
-              <CardHeader>
-                <CardTitle className="text-gray-900 font-normal text-xl mb-2">
-                  MVP Build
-                </CardTitle>
-                <CardDescription className="font-light text-gray-600 text-sm">
-                  For founders validating core mechanics
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-col gap-6 justify-start">
-                  <p className="flex flex-row items-baseline gap-2">
-                    <span className="text-4xl font-light text-gray-900">₹80,000</span>
-                    <span className="text-sm text-gray-500 font-light">
-                      starting
-                    </span>
-                  </p>
-                  <div className="flex flex-col gap-3 justify-start">
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Cross-platform architecture (iOS & Android)</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Core user flow & state management</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Automated CI/CD deployment pipelines</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">3–4 week rapid delivery cycle</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Complete IP and codebase ownership</p>
-                    </div>
-                  </div>
-                  <div className="pt-2">
-                    <p className="text-xs text-gray-500 font-light mb-4">
-                      <span className="font-medium text-gray-700">Best for:</span> market validation, seed-stage product demos, and core feature testing
-                    </p>
-                  </div>
-                  <Button variant="outline" className="gap-2 font-light text-gray-900 border-gray-300 hover:bg-gray-50 w-full" asChild>
-                    <Link href="https://wa.me/919315735371" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to initiate MVP build">
-                      Initiate MVP Build <MoveRight className="w-4 h-4" aria-hidden="true" />
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+    <div className="w-full py-[clamp(96px,12vw,160px)]">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-8">
+        <FadeIn className="mx-auto max-w-3xl text-center">
+          <h2 className="text-[clamp(2.125rem,4vw,3.5rem)] font-semibold tracking-tight text-slate-900">
+            Pricing
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-[17px] leading-relaxed text-slate-500">
+            Clear pricing. No surprises. Most projects fall into one of the options below.
+          </p>
+        </FadeIn>
 
-            {/* Full App Build */}
-            <Card className="w-full rounded-md border-2 border-gray-900 hover:border-gray-900 transition-all duration-300 hover:shadow-2xl bg-white shadow-xl relative">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-gray-900 text-white font-light text-xs px-3 py-1">
-                  Most Popular
-                </Badge>
-              </div>
-              <CardHeader>
-                <CardTitle className="text-gray-900 font-normal text-xl mb-2">
-                  Full App Build
-                </CardTitle>
-                <CardDescription className="font-light text-gray-600 text-sm">
-                  For scalable consumer apps, marketplaces, and transactional platforms
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-col gap-6 justify-start">
-                  <p className="flex flex-row items-baseline gap-2">
-                    <span className="text-4xl font-light text-gray-900">₹2,00,000</span>
-                    <span className="text-sm text-gray-500 font-light">
-                      starting
-                    </span>
-                  </p>
-                  <div className="flex flex-col gap-3 justify-start">
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Production-grade backend infrastructure (Node.js/Supabase)</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Complex state management & real-time WebSockets</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Secure payment routing & third-party API integrations</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Dedicated admin control dashboard</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Post-deployment SLA and stability support</p>
-                    </div>
-                  </div>
-                  <div className="pt-2">
-                    <p className="text-xs text-gray-500 font-light mb-4">
-                      <span className="font-medium text-gray-700">Best for:</span> consumer social apps (e.g., dating/matching mechanics), on-demand service platforms, and revenue-generating products
-                    </p>
-                  </div>
-                  <Button className="gap-2 font-light bg-gray-900 hover:bg-gray-800 text-white w-full" asChild>
-                    <Link href="https://wa.me/919315735371" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to request a technical review">
-                      Request Technical Review <MoveRight className="w-4 h-4" aria-hidden="true" />
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Advanced / Custom Systems */}
-            <Card className="w-full rounded-md border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-xl bg-white shadow-md">
-              <CardHeader>
-                <CardTitle className="text-gray-900 font-normal text-xl mb-2">
-                  Advanced / Custom Systems
-                </CardTitle>
-                <CardDescription className="font-light text-gray-600 text-sm">
-                  For heavy infrastructure, multi-sided platforms, and AI-integrated systems
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-col gap-6 justify-start">
-                  <p className="flex flex-row items-baseline gap-2">
-                    <span className="text-4xl font-light text-gray-900">Custom</span>
-                    <span className="text-sm text-gray-500 font-light">
-                      pricing
-                    </span>
-                  </p>
-                  <div className="flex flex-col gap-3 justify-start">
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Multi-app ecosystems (e.g., Customer App + Provider App + Admin)</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Microservices, geolocation tracking & background worker queues</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Applied AI & matching algorithm integrations</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Legacy system refactoring & migration</p>
-                    </div>
-                    <div className="flex flex-row gap-3">
-                      <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Long-term architectural consulting</p>
-                    </div>
-                  </div>
-                  <div className="pt-2">
-                    <p className="text-xs text-gray-500 font-light mb-4">
-                      <span className="font-medium text-gray-700">Best for:</span> large-scale service aggregators (e.g., Urban Company models), high-concurrency consumer networks, and complex enterprise automation
-                    </p>
-                  </div>
-                  <Button variant="outline" className="gap-2 font-light text-gray-900 border-gray-300 hover:bg-gray-50 w-full" asChild>
-                    <Link href="https://wa.me/919315735371" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to discuss architecture">
-                      Discuss Architecture <MoveRight className="w-4 h-4" aria-hidden="true" />
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          <div className="pt-12 text-center space-y-4">
-            <p className="text-sm text-gray-500 font-light max-w-2xl mx-auto">
-              We take on a limited number of projects each month to ensure quality and timelines don't slip.
-            </p>
-            <div className="flex justify-center mt-6">
-              <Badge className="bg-gray-900 text-white font-light text-sm px-6 py-2 rounded-full">
-                25+ apps delivered in 12 months
-              </Badge>
+        <div className="mx-auto mt-20 grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-10">
+          {pricingTiers.map((tier, index) => (
+            <div
+              key={tier.title}
+              className={cn(
+                "h-full",
+                index === 2 &&
+                  "md:col-span-2 md:mx-auto md:w-full md:max-w-[min(100%,480px)] lg:col-span-1 lg:max-w-none"
+              )}
+            >
+              <PricingTierCard tier={tier} index={index} />
             </div>
-          </div>
+          ))}
         </div>
+
+        <FadeIn delay={300} className="mt-20 space-y-5 text-center">
+          <p className="mx-auto max-w-2xl text-sm leading-relaxed text-slate-500">
+            We take on a limited number of projects each month to ensure quality and timelines
+            don&apos;t slip.
+          </p>
+          <div className="flex justify-center">
+            <Badge className="rounded-full border border-slate-200 bg-white px-6 py-2 text-sm font-medium text-slate-700 shadow-sm">
+              25+ apps delivered in 12 months
+            </Badge>
+          </div>
+        </FadeIn>
       </div>
     </div>
   );

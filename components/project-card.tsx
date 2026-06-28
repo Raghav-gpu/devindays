@@ -7,10 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { Project } from "@/constants/projects";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 type ProjectCardProps = {
   project: Project;
+  className?: string;
 };
 
 function StoreLinks({ project }: ProjectCardProps) {
@@ -58,23 +60,28 @@ function StoreLinks({ project }: ProjectCardProps) {
   );
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, className }: ProjectCardProps) {
   return (
-    <Card className="border-gray-200 overflow-hidden hover:border-gray-300 transition-all duration-300 hover:shadow-2xl bg-white h-full shadow-lg flex flex-col min-h-[420px] sm:min-h-[440px] md:min-h-0">
-      <div className="relative w-full bg-gray-50">
-        <div className="flex flex-col items-center justify-center p-5 sm:p-6 md:p-6 gap-4">
-          <div className="flex items-center justify-center gap-3 sm:gap-4 w-full">
+    <Card
+      className={cn(
+        "flex h-full flex-col overflow-hidden border-gray-200 bg-white shadow-lg transition-all duration-300 hover:border-gray-300 hover:shadow-2xl",
+        className
+      )}
+    >
+      <div className="relative w-full shrink-0 bg-gray-50">
+        <div className="flex flex-col items-center justify-center gap-4 p-[clamp(16px,2vw,24px)]">
+          <div className="grid w-full grid-cols-2 gap-[clamp(8px,1.5vw,16px)]">
             {project.images.map((image, index) => (
               <div
                 key={`${project.id}-image-${index}`}
-                className="relative aspect-[9/16] flex-1 max-w-[175px] sm:max-w-[195px] md:max-w-[140px] rounded-xl overflow-hidden shadow-lg border border-gray-200"
+                className="relative aspect-[9/16] w-full overflow-hidden rounded-xl border border-gray-200 shadow-lg"
               >
                 <Image
                   src={image}
                   alt={`${project.title} screenshot ${index + 1}`}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 42vw, 140px"
+                  sizes="(max-width: 768px) 42vw, (max-width: 1280px) 28vw, 220px"
                   loading="lazy"
                 />
               </div>
@@ -84,16 +91,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </div>
 
-      <CardHeader className="pb-3 px-5 sm:px-6 md:px-6">
+      <CardHeader className="shrink-0 px-[clamp(16px,2vw,24px)] pb-3 pt-[clamp(16px,2vw,20px)]">
         <div className="flex items-start justify-between gap-3">
-          <div>
-            <CardTitle className="text-xl sm:text-2xl font-normal mb-1 text-gray-900">
+          <div className="min-w-0">
+            <CardTitle className="mb-1 line-clamp-2 font-normal text-gray-900 text-[clamp(1.125rem,1.6vw,1.5rem)] leading-snug">
               {project.title}
             </CardTitle>
             {project.badge && (
               <Badge
                 variant="secondary"
-                className="mt-2 font-light bg-gray-100 text-gray-900 border-gray-200"
+                className="mt-2 max-w-full font-light bg-gray-100 text-gray-900 border-gray-200"
               >
                 {project.badge}
               </Badge>
@@ -102,7 +109,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {project.featured && (
             <Badge
               variant="outline"
-              className="font-light text-gray-900 border-gray-300 shrink-0"
+              className="shrink-0 font-light text-gray-900 border-gray-300"
             >
               FEATURED
             </Badge>
@@ -110,8 +117,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </CardHeader>
 
-      <CardContent className="pt-0 mt-auto px-5 sm:px-6 md:px-6">
-        <CardDescription className="text-sm sm:text-base text-gray-600 font-light leading-relaxed">
+      <CardContent className="mt-auto flex flex-1 flex-col px-[clamp(16px,2vw,24px)] pb-[clamp(16px,2vw,24px)] pt-0">
+        <CardDescription className="line-clamp-4 flex-1 font-light leading-relaxed text-gray-600 text-[clamp(0.875rem,1.1vw,1rem)]">
           {project.description}
         </CardDescription>
       </CardContent>
