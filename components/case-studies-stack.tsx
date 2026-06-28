@@ -306,7 +306,7 @@ function CaseStudiesStory() {
         <div ref={desktopTrackRef} className="relative">
           <div ref={desktopPinRef} className="relative h-svh w-full overflow-hidden">
             <div className="flex h-full w-full items-center justify-center px-[clamp(16px,4vw,48px)]">
-              <div className="relative h-[min(78vh,820px)] min-h-[520px] w-full max-w-[1180px] min-[1400px]:max-w-[1400px] xl:min-h-[580px] min-[1400px]:min-h-[650px]">
+              <div className="relative h-[min(88vh,900px)] min-h-[560px] w-full max-w-[1180px] min-[1400px]:max-w-[1400px] xl:min-h-[600px] min-[1400px]:min-h-[680px]">
                 {caseStudies.map((caseStudy, index) => (
                   <div
                     key={caseStudy.id}

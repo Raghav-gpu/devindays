@@ -77,11 +77,9 @@ export default function Home() {
         <Suspense fallback={<SectionPlaceholder minHeight="800px" />}>
           <ProjectsSection />
         </Suspense>
-        <div className="content-auto">
-          <WhyWorkWithUs />
-          <FounderMoment />
-          <FounderMessage />
-        </div>
+        <WhyWorkWithUs />
+        <FounderMoment />
+        <FounderMessage />
         <Suspense fallback={<SectionPlaceholder minHeight="700px" />}>
           <FAQSection />
         </Suspense>

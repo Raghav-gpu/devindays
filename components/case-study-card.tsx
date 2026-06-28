@@ -181,7 +181,7 @@ export const CaseStudyCard = memo(function CaseStudyCard({
           />
         </div>
 
-        <div className="flex min-h-0 min-w-0 flex-col justify-center overflow-y-auto p-[clamp(20px,3vw,36px)] lg:min-w-[420px] lg:p-6 min-[1200px]:p-7 min-[1400px]:p-8">
+        <div className="flex min-h-0 min-w-0 flex-col justify-center overflow-hidden p-[clamp(20px,3vw,36px)] lg:min-w-[420px] lg:gap-0 lg:p-5 min-[1200px]:p-6 min-[1400px]:p-7">
           <PlatformChips platforms={caseStudy.platforms} />
 
           <div>
@@ -197,10 +197,10 @@ export const CaseStudyCard = memo(function CaseStudyCard({
               </Badge>
             </div>
 
-            <p className="mb-4 max-w-[65ch] text-[clamp(1rem,1.2vw,1.125rem)] leading-relaxed font-light text-gray-600 lg:mb-4">
+            <p className="mb-3 max-w-[65ch] text-[clamp(1rem,1.2vw,1.125rem)] leading-relaxed font-light text-gray-600 lg:mb-3">
               {caseStudy.tagline}
             </p>
-            <p className="mb-4 max-w-[65ch] text-[clamp(1.0625rem,1.4vw,1.25rem)] font-normal text-gray-900 lg:mb-4">
+            <p className="mb-3 max-w-[65ch] text-[clamp(1.0625rem,1.4vw,1.25rem)] font-normal text-gray-900 lg:mb-3">
               {caseStudy.headline}
             </p>
             <p className="max-w-[65ch] text-[clamp(1rem,1.2vw,1.125rem)] leading-relaxed font-light text-gray-600">
@@ -210,7 +210,7 @@ export const CaseStudyCard = memo(function CaseStudyCard({
             <StoreLinks caseStudy={caseStudy} />
           </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-2 border-b border-gray-200 pb-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-2.5">
+          <div className="mt-5 grid grid-cols-1 gap-2 border-b border-gray-200 pb-5 md:grid-cols-2 lg:mt-5 lg:grid-cols-3 lg:gap-2 lg:pb-5">
             {caseStudy.metrics.map((metric) => (
               <div
                 key={`${caseStudy.id}-${metric.label}`}
@@ -226,9 +226,9 @@ export const CaseStudyCard = memo(function CaseStudyCard({
             ))}
           </div>
 
-          <div className="mt-6">
-            <p className="mb-3 text-sm font-medium text-gray-900">Key Features</p>
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-2.5">
+          <div className="mt-5 lg:mt-5">
+            <p className="mb-2.5 text-sm font-medium text-gray-900 lg:mb-2.5">Key Features</p>
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-2">
               {caseStudy.features.map((feature) => (
                 <div
                   key={`${caseStudy.id}-${feature}`}

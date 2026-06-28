@@ -1,9 +1,11 @@
 import { ProjectsCarousel } from "@/components/projects-carousel";
+import { ScrollTriggerRefresh } from "@/components/scroll-trigger-refresh";
 import { projects } from "@/constants/projects";
 
 export function ProjectsSection() {
   return (
     <section id="projects" className="bg-[#FAFAFA] px-6 py-[clamp(80px,10vw,112px)] lg:px-8">
+      <ScrollTriggerRefresh />
       <div className="mx-auto w-full max-w-7xl">
         <div className="mb-[clamp(40px,6vw,64px)] text-center">
           <h2 className="mb-4 font-light text-gray-900 text-[clamp(2.125rem,4vw,3rem)] leading-tight">
