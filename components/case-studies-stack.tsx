@@ -60,6 +60,16 @@ function shouldLoadCaseStudyImage(index: number, activeIndex: number, sectionVis
   return Math.abs(index - activeIndex) <= 1;
 }
 
+function restoreScrollPosition(scrollY: number) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      if (Math.abs(window.scrollY - scrollY) > 4) {
+        window.scrollTo(0, scrollY);
+      }
+    });
+  });
+}
+
 function CaseStudiesStory() {
   const sectionRef = useRef<HTMLElement>(null);
   const desktopTrackRef = useRef<HTMLDivElement>(null);
@@ -80,7 +90,7 @@ function CaseStudiesStory() {
       ([entry]) => {
         setSectionVisible(entry.isIntersecting);
       },
-      { rootMargin: "400px 0px", threshold: 0.01 }
+      { rootMargin: "200px 0px", threshold: 0.01 }
     );
 
     observer.observe(section);
@@ -90,12 +100,40 @@ function CaseStudiesStory() {
     };
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1023px)");
+
+    if (!mediaQuery.matches) {
+      return;
+    }
+
+    const cards = mobileCardRefs.current.filter(Boolean) as HTMLDivElement[];
+    const observers = cards.map((card, index) => {
+      const cardObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveIndex(index);
+          }
+        },
+        { threshold: 0.35, rootMargin: "0px 0px -10% 0px" }
+      );
+
+      cardObserver.observe(card);
+      return cardObserver;
+    });
+
+    return () => {
+      observers.forEach((cardObserver) => cardObserver.disconnect());
+    };
+  }, []);
+
   useLayoutEffect(() => {
-    if (!sectionRef.current || !sectionVisible) {
+    if (!sectionRef.current) {
       return;
     }
 
     let cancelled = false;
+    const initialScrollY = window.scrollY;
 
     async function setupAnimations() {
       const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
@@ -164,6 +202,7 @@ function CaseStudiesStory() {
             start: "top top",
             end: `+=${endDistance}`,
             pin: desktopPinRef.current,
+            pinSpacing: true,
             scrub: SCRUB_AMOUNT,
             anticipatePin: 0,
             invalidateOnRefresh: true,
@@ -222,64 +261,20 @@ function CaseStudiesStory() {
       });
 
       mm.add("(max-width: 1023px)", () => {
-        const cards = mobileCardRefs.current.filter(Boolean) as HTMLDivElement[];
-
-        cards.forEach((card, index) => {
-          const mockup = getCardMockup(card);
-
-          gsap.fromTo(
-            card,
-            {
-              y: 40,
-              opacity: 0,
-              force3D: true,
-            },
-            {
-              y: 0,
-              opacity: 1,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 88%",
-                end: "top 55%",
-                scrub: SCRUB_AMOUNT,
-                onEnter: () => setActiveIndex(index),
-              },
-            }
-          );
-
-          if (mockup) {
-            gsap.fromTo(
-              mockup,
-              {
-                y: 40,
-                opacity: 0,
-                scale: 0.96,
-                force3D: true,
-              },
-              {
-                y: 0,
-                opacity: 1,
-                scale: 1,
-                ease: "power2.out",
-                scrollTrigger: {
-                  trigger: card,
-                  start: "top 88%",
-                  end: "top 55%",
-                  scrub: SCRUB_AMOUNT,
-                },
-              }
-            );
-          }
-        });
+        // Keep mobile scrolling native — no scrub triggers that can fight page scroll.
       });
 
       const handleResize = () => {
+        const scrollY = window.scrollY;
         ScrollTrigger.refresh(true);
+        restoreScrollPosition(scrollY);
       };
 
       window.addEventListener("resize", handleResize);
-      ScrollTrigger.refresh(true);
+
+      if (!cancelled) {
+        restoreScrollPosition(initialScrollY);
+      }
 
       return () => {
         window.removeEventListener("resize", handleResize);
@@ -293,7 +288,7 @@ function CaseStudiesStory() {
       cancelled = true;
       cleanupPromise.then((cleanup) => cleanup?.());
     };
-  }, [sectionVisible]);
+  }, []);
 
   return (
     <section ref={sectionRef} className="overflow-x-clip bg-white">

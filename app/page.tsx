@@ -12,26 +12,14 @@ import { WhyWorkWithUs } from "@/components/why-work-with-us";
 import { FounderMoment } from "@/components/founder-moment";
 import { FounderMessage } from "@/components/founder-message";
 import FAQSection from "@/components/faq-section";
-import {
-  DeferredFocusFlowCaseStudy,
-} from "@/components/deferred-below-fold";
+import { FocusFlowCaseStudy } from "@/components/focusflow-case-study";
 import { ProjectsSection } from "@/components/projects-section";
+import { ContactSection } from "@/components/contact-section";
+import { Footer } from "@/components/footer";
 
 const PricingSection = dynamic(
   () => import("@/components/pricing-section").then((mod) => mod.PricingSection),
   { loading: () => <SectionPlaceholder minHeight="900px" /> }
-);
-
-const FocusFlowCaseStudy = DeferredFocusFlowCaseStudy;
-
-const ContactSection = dynamic(
-  () => import("@/components/contact-section").then((mod) => mod.ContactSection),
-  { loading: () => <SectionPlaceholder minHeight="600px" /> }
-);
-
-const Footer = dynamic(
-  () => import("@/components/footer").then((mod) => mod.Footer),
-  { loading: () => <SectionPlaceholder minHeight="320px" /> }
 );
 
 function SectionPlaceholder({ minHeight }: { minHeight: string }) {
@@ -56,31 +44,23 @@ export default function Home() {
       <Navbar />
       <main id="main-content">
         <HeroSection />
-        <div className="content-auto">
-          <ReassuranceSection />
-          <WhoThisIsFor />
-          <WhatWeDo />
-        </div>
+        <ReassuranceSection />
+        <WhoThisIsFor />
+        <WhatWeDo />
         <Suspense fallback={<SectionPlaceholder minHeight="900px" />}>
           <PricingSection />
         </Suspense>
         <HowItWorks />
         <RiskReversal />
-        <Suspense fallback={<SectionPlaceholder minHeight="1200px" />}>
-          <FocusFlowCaseStudy />
-        </Suspense>
+        <FocusFlowCaseStudy />
         <ProjectsSection />
         <WhyWorkWithUs />
         <FounderMoment />
         <FounderMessage />
         <FAQSection />
-        <Suspense fallback={<SectionPlaceholder minHeight="600px" />}>
-          <ContactSection />
-        </Suspense>
+        <ContactSection />
       </main>
-      <Suspense fallback={<SectionPlaceholder minHeight="320px" />}>
-        <Footer />
-      </Suspense>
+      <Footer />
     </div>
   );
 }

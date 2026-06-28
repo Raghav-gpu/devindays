@@ -55,7 +55,7 @@ export function HeroSection() {
           >
             See How It Works
           </ScrollToButton>
-        </div>
+        </div> 
       </div>
     </section>
   );
