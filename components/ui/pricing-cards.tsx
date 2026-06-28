@@ -31,13 +31,13 @@ function Pricing() {
                   MVP Build
                 </CardTitle>
                 <CardDescription className="font-light text-gray-600 text-sm">
-                  For founders launching their first version
+                  For founders validating core mechanics
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col gap-6 justify-start">
                   <p className="flex flex-row items-baseline gap-2">
-                    <span className="text-4xl font-light text-gray-900">₹40,000</span>
+                    <span className="text-4xl font-light text-gray-900">₹80,000</span>
                     <span className="text-sm text-gray-500 font-light">
                       starting
                     </span>
@@ -45,33 +45,33 @@ function Pricing() {
                   <div className="flex flex-col gap-3 justify-start">
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Cross-platform mobile app (iOS + Android)</p>
+                      <p className="font-light text-gray-700 text-sm">Cross-platform architecture (iOS & Android)</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Core MVP features only (no bloat)</p>
+                      <p className="font-light text-gray-700 text-sm">Core user flow & state management</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Clean, production-ready codebase</p>
+                      <p className="font-light text-gray-700 text-sm">Automated CI/CD deployment pipelines</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">2–3 week delivery</p>
+                      <p className="font-light text-gray-700 text-sm">3–4 week rapid delivery cycle</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Full code ownership</p>
+                      <p className="font-light text-gray-700 text-sm">Complete IP and codebase ownership</p>
                     </div>
                   </div>
                   <div className="pt-2">
                     <p className="text-xs text-gray-500 font-light mb-4">
-                      <span className="font-medium text-gray-700">Best for:</span> validating ideas, early users, demos, first launch
+                      <span className="font-medium text-gray-700">Best for:</span> market validation, seed-stage product demos, and core feature testing
                     </p>
                   </div>
                   <Button variant="outline" className="gap-2 font-light text-gray-900 border-gray-300 hover:bg-gray-50 w-full" asChild>
-                    <Link href="https://wa.me/919315735371" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to build your MVP">
-                      Build My MVP <MoveRight className="w-4 h-4" aria-hidden="true" />
+                    <Link href="https://wa.me/919315735371" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to initiate MVP build">
+                      Initiate MVP Build <MoveRight className="w-4 h-4" aria-hidden="true" />
                     </Link>
                   </Button>
                 </div>
@@ -90,13 +90,13 @@ function Pricing() {
                   Full App Build
                 </CardTitle>
                 <CardDescription className="font-light text-gray-600 text-sm">
-                  For founders ready to scale beyond MVP
+                  For scalable consumer apps, marketplaces, and transactional platforms
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col gap-6 justify-start">
                   <p className="flex flex-row items-baseline gap-2">
-                    <span className="text-4xl font-light text-gray-900">₹80,000</span>
+                    <span className="text-4xl font-light text-gray-900">₹2,00,000</span>
                     <span className="text-sm text-gray-500 font-light">
                       starting
                     </span>
@@ -104,33 +104,33 @@ function Pricing() {
                   <div className="flex flex-col gap-3 justify-start">
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Everything in MVP, plus</p>
+                      <p className="font-light text-gray-700 text-sm">Production-grade backend infrastructure (Node.js/Supabase)</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Backend & APIs</p>
+                      <p className="font-light text-gray-700 text-sm">Complex state management & real-time WebSockets</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Authentication, roles & integrations</p>
+                      <p className="font-light text-gray-700 text-sm">Secure payment routing & third-party API integrations</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Scalable architecture</p>
+                      <p className="font-light text-gray-700 text-sm">Dedicated admin control dashboard</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Post-launch support</p>
+                      <p className="font-light text-gray-700 text-sm">Post-deployment SLA and stability support</p>
                     </div>
                   </div>
                   <div className="pt-2">
                     <p className="text-xs text-gray-500 font-light mb-4">
-                      <span className="font-medium text-gray-700">Best for:</span> real users, payments, dashboards, growth
+                      <span className="font-medium text-gray-700">Best for:</span> consumer social apps (e.g., dating/matching mechanics), on-demand service platforms, and revenue-generating products
                     </p>
                   </div>
                   <Button className="gap-2 font-light bg-gray-900 hover:bg-gray-800 text-white w-full" asChild>
-                    <Link href="https://wa.me/919315735371" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to get a project quote">
-                      Get a Project Quote <MoveRight className="w-4 h-4" aria-hidden="true" />
+                    <Link href="https://wa.me/919315735371" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to request a technical review">
+                      Request Technical Review <MoveRight className="w-4 h-4" aria-hidden="true" />
                     </Link>
                   </Button>
                 </div>
@@ -144,7 +144,7 @@ function Pricing() {
                   Advanced / Custom Systems
                 </CardTitle>
                 <CardDescription className="font-light text-gray-600 text-sm">
-                  For complex workflows and AI-powered products
+                  For heavy infrastructure, multi-sided platforms, and AI-integrated systems
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -158,33 +158,33 @@ function Pricing() {
                   <div className="flex flex-col gap-3 justify-start">
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">AI features & automations</p>
+                      <p className="font-light text-gray-700 text-sm">Multi-app ecosystems (e.g., Customer App + Provider App + Admin)</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Admin panels & dashboards</p>
+                      <p className="font-light text-gray-700 text-sm">Microservices, geolocation tracking & background worker queues</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Web + mobile systems</p>
+                      <p className="font-light text-gray-700 text-sm">Applied AI & matching algorithm integrations</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Advanced integrations</p>
+                      <p className="font-light text-gray-700 text-sm">Legacy system refactoring & migration</p>
                     </div>
                     <div className="flex flex-row gap-3">
                       <Check className="w-4 h-4 mt-0.5 text-gray-900 flex-shrink-0" />
-                      <p className="font-light text-gray-700 text-sm">Long-term scalability planning</p>
+                      <p className="font-light text-gray-700 text-sm">Long-term architectural consulting</p>
                     </div>
                   </div>
                   <div className="pt-2">
                     <p className="text-xs text-gray-500 font-light mb-4">
-                      <span className="font-medium text-gray-700">Best for:</span> internal tools, AI products, complex platforms
+                      <span className="font-medium text-gray-700">Best for:</span> large-scale service aggregators (e.g., Urban Company models), high-concurrency consumer networks, and complex enterprise automation
                     </p>
                   </div>
                   <Button variant="outline" className="gap-2 font-light text-gray-900 border-gray-300 hover:bg-gray-50 w-full" asChild>
-                    <Link href="https://wa.me/919315735371" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to discuss your requirements">
-                      Discuss My Requirements <MoveRight className="w-4 h-4" aria-hidden="true" />
+                    <Link href="https://wa.me/919315735371" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp to discuss architecture">
+                      Discuss Architecture <MoveRight className="w-4 h-4" aria-hidden="true" />
                     </Link>
                   </Button>
                 </div>
