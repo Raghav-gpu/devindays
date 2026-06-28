@@ -6,11 +6,12 @@ const nextConfig: NextConfig = {
     deviceSizes: [480, 640, 768, 1024, 1200, 1440, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
+    qualities: [100],
   },
   compress: true,
   poweredByHeader: false,
   experimental: {
-    optimizePackageImports: ["lucide-react"],
+    optimizePackageImports: ["lucide-react", "embla-carousel-react"],
   },
   async headers() {
     return [
@@ -34,6 +35,15 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/icons/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/fonts/:path*",
         headers: [
           {
             key: "Cache-Control",

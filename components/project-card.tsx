@@ -35,6 +35,8 @@ export const ProjectCard = memo(function ProjectCard({
         project.playStoreUrl && "transition-opacity duration-200 hover:opacity-95"
       )}
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+      quality={100}
+      decoding="async"
       loading={priority ? undefined : "lazy"}
       priority={priority}
       fetchPriority={priority ? "high" : "auto"}

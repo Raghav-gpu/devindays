@@ -1,4 +1,3 @@
-import { ScrollLink } from "@/components/scroll-link";
 import Link from "next/link";
 
 export function Footer() {
@@ -37,36 +36,36 @@ export function Footer() {
             <h3 className="mb-4 text-sm font-semibold text-gray-900">Services</h3>
             <ul className="space-y-2">
               <li>
-                <ScrollLink
-                  targetId="what-we-do"
+                <a
+                  href="#what-we-do"
                   className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   What We Do
-                </ScrollLink>
+                </a>
               </li>
               <li>
-                <ScrollLink
-                  targetId="pricing"
+                <a
+                  href="#pricing"
                   className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   Pricing
-                </ScrollLink>
+                </a>
               </li>
               <li>
-                <ScrollLink
-                  targetId="how-it-works"
+                <a
+                  href="#how-it-works"
                   className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   How It Works
-                </ScrollLink>
+                </a>
               </li>
               <li>
-                <ScrollLink
-                  targetId="projects"
+                <a
+                  href="#projects"
                   className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   Projects
-                </ScrollLink>
+                </a>
               </li>
             </ul>
           </div>
@@ -75,20 +74,20 @@ export function Footer() {
             <h3 className="mb-4 text-sm font-semibold text-gray-900">Company</h3>
             <ul className="space-y-2">
               <li>
-                <ScrollLink
-                  targetId="why-us"
+                <a
+                  href="#why-us"
                   className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   Why Work With Us
-                </ScrollLink>
+                </a>
               </li>
               <li>
-                <ScrollLink
-                  targetId="contact"
+                <a
+                  href="#contact"
                   className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   Contact
-                </ScrollLink>
+                </a>
               </li>
               <li>
                 <a

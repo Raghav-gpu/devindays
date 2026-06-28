@@ -3,7 +3,7 @@
 import { runAfterInteraction } from "@/lib/deferred-init";
 import { useEffect } from "react";
 
-export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
+export function AnalyticsInit() {
   useEffect(() => {
     runAfterInteraction(async () => {
       if (process.env.NEXT_PUBLIC_POSTHOG_KEY) {
@@ -18,5 +18,5 @@ export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  return <>{children}</>;
+  return null;
 }

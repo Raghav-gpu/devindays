@@ -1,6 +1,5 @@
 "use client";
 
-import { ScrollLink } from "@/components/scroll-link";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -77,14 +76,13 @@ export function Navbar() {
 
             <div className="hidden items-center space-x-2 lg:flex">
               {navLinks.map((link) => (
-                <ScrollLink
+                <a
                   key={link.id}
-                  targetId={link.id}
                   href={link.href}
                   className="inline-flex min-h-11 items-center px-2 text-sm font-light text-gray-600 transition-colors hover:text-gray-900"
                 >
                   {link.label}
-                </ScrollLink>
+                </a>
               ))}
             </div>
 
@@ -122,15 +120,14 @@ export function Navbar() {
               className="space-y-4 border-t border-gray-100 py-4 lg:hidden"
             >
               {navLinks.map((link) => (
-                <ScrollLink
+                <a
                   key={link.id}
-                  targetId={link.id}
                   href={link.href}
-                  onNavigate={closeMenu}
+                  onClick={closeMenu}
                   className="block min-h-11 py-2 text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   {link.label}
-                </ScrollLink>
+                </a>
               ))}
               <div className="pt-4">
                 <Button size="sm" className="w-full bg-gray-900 text-white hover:bg-gray-800" asChild>

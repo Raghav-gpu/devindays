@@ -1,8 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Terms of Service | DevInDays",
-  description: "Terms of Service for DevInDays - Fast App Development for Founders",
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description:
+    "Terms of Service for DevInDays — the terms governing use of our website and app development services.",
+  alternates: {
+    canonical: "https://devindays.com/terms",
+  },
+  openGraph: {
+    title: "Terms of Service | DevInDays",
+    description: "Terms of Service for DevInDays app development services.",
+    url: "https://devindays.com/terms",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function TermsPage() {

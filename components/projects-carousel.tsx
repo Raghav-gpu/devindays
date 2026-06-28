@@ -12,7 +12,7 @@ import type { Project } from "@/constants/projects";
 import { cn } from "@/lib/utils";
 import WheelGesturesPlugin from "embla-carousel-wheel-gestures";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type ProjectsCarouselProps = {
   projects: Project[];
@@ -36,6 +36,7 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
   const [slideCount, setSlideCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [loadedSlides, setLoadedSlides] = useState<Set<number>>(() => new Set());
 
   useEffect(() => {
     const node = containerRef.current;
@@ -81,30 +82,27 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
     };
   }, [api]);
 
-  const visibleSlides = getVisibleRange(current, projects.length);
-  const nextIndex = projects.length > 0 ? (current + 1) % projects.length : 0;
-
-  const preloadNextSlide = useCallback(() => {
+  useEffect(() => {
     if (!isVisible || projects.length === 0) {
       return;
     }
 
-    const nextImage = projects[nextIndex]?.images[0];
+    const nearbySlides = getVisibleRange(current, projects.length);
 
-    if (!nextImage) {
-      return;
-    }
+    setLoadedSlides((previous) => {
+      let changed = false;
+      const next = new Set(previous);
 
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.as = "image";
-    link.href = nextImage;
-    document.head.appendChild(link);
-  }, [isVisible, nextIndex, projects]);
+      nearbySlides.forEach((index) => {
+        if (!next.has(index)) {
+          next.add(index);
+          changed = true;
+        }
+      });
 
-  useEffect(() => {
-    preloadNextSlide();
-  }, [preloadNextSlide, current]);
+      return changed ? next : previous;
+    });
+  }, [current, isVisible, projects.length]);
 
   return (
     <div ref={containerRef} className="relative">
@@ -132,8 +130,8 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
               >
                 <ProjectCard
                   project={project}
-                  shouldLoadImage={isVisible && visibleSlides.has(index)}
-                  priority={isVisible && index === nextIndex}
+                  shouldLoadImage={loadedSlides.has(index)}
+                  priority={false}
                 />
               </CarouselItem>
             ))}

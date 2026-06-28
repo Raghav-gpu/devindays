@@ -1,21 +1,28 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import { AnalyticsProvider } from "@/components/analytics-provider";
+import { AnalyticsInit } from "@/components/analytics-init";
 import { StructuredData } from "@/components/structured-data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
+  preload: false,
   adjustFontFallback: true,
+  weight: ["300", "400"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#000000",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://devindays.com"),
   title: {
-    default: "DevInDays - Fast App Development for Founders",
+    default: "DevInDays - Build your MVP",
     template: "%s | DevInDays",
   },
   description:
@@ -53,7 +60,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "DevInDays - Fast App Development for Founders",
+        alt: "DevInDays - Build your MVP",
       },
     ],
   },
@@ -76,27 +83,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: [
-      { url: "/icons/icon-16.png", sizes: "16x16", type: "image/png" },
-      { url: "/icons/icon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: ["/icons/icon-32.png"],
-    other: [
-      { rel: "mask-icon", url: "/logo.png", color: "#000000" },
-    ],
-  },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     title: "DevInDays",
     statusBarStyle: "default",
-  },
-  other: {
-    "theme-color": "#000000",
   },
 };
 
@@ -108,9 +99,13 @@ export default function RootLayout({
   return (
     <html lang="en-IN">
       <head>
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://app.posthog.com" />
-        <link rel="dns-prefetch" href="https://wa.me" />
+        <link
+          rel="preload"
+          href="/fonts/geist-lcp.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className={`${geistSans.variable} font-sans antialiased`}>
         <a
@@ -120,7 +115,8 @@ export default function RootLayout({
           Skip to main content
         </a>
         <StructuredData />
-        <AnalyticsProvider>{children}</AnalyticsProvider>
+        {children}
+        <AnalyticsInit />
       </body>
     </html>
   );

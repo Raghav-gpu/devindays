@@ -101,6 +101,8 @@ function DeviceMockupHero({
         caseStudy.playStoreUrl && "transition-opacity duration-200 hover:opacity-95"
       )}
       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 78vw, (max-width: 1200px) 50vw, 40vw"
+      quality={100}
+      decoding="async"
       priority={priority}
       loading={priority ? undefined : "lazy"}
       fetchPriority={priority ? "high" : "auto"}

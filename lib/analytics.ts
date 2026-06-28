@@ -1,60 +1,79 @@
 "use client";
 
-import posthog from "posthog-js";
 import { useEffect } from "react";
 
-// PostHog initialization
-export function initPostHog() {
-  if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
-      loaded: (posthog) => {
-        if (process.env.NODE_ENV === "development") {
-          posthog.debug();
-        }
-      },
-    });
+export async function initPostHog() {
+  if (typeof window === "undefined" || !process.env.NEXT_PUBLIC_POSTHOG_KEY) {
+    return;
   }
+
+  const posthog = (await import("posthog-js")).default;
+
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
+    loaded: (client) => {
+      if (process.env.NODE_ENV === "development") {
+        client.debug();
+      }
+    },
+  });
 }
 
-// PostHog hooks
 export function usePostHog() {
   useEffect(() => {
-    initPostHog();
+    void initPostHog();
   }, []);
 
   return {
-    capture: (event: string, properties?: Record<string, any>) => {
-      if (typeof window !== "undefined") {
-        posthog.capture(event, properties);
+    capture: async (event: string, properties?: Record<string, unknown>) => {
+      if (typeof window === "undefined") {
+        return;
       }
+
+      const posthog = (await import("posthog-js")).default;
+      posthog.capture(event, properties);
     },
-    identify: (userId: string, properties?: Record<string, any>) => {
-      if (typeof window !== "undefined") {
-        posthog.identify(userId, properties);
+    identify: async (userId: string, properties?: Record<string, unknown>) => {
+      if (typeof window === "undefined") {
+        return;
       }
+
+      const posthog = (await import("posthog-js")).default;
+      posthog.identify(userId, properties);
     },
   };
 }
 
-// Google Analytics
 export function initGA() {
-  if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_GA_ID) {
-    // Load gtag script
-    const script1 = document.createElement("script");
-    script1.async = true;
-    script1.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`;
-    document.head.appendChild(script1);
-
-    const script2 = document.createElement("script");
-    script2.innerHTML = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-    `;
-    document.head.appendChild(script2);
+  if (typeof window === "undefined" || !process.env.NEXT_PUBLIC_GA_ID) {
+    return;
   }
+
+  const script1 = document.createElement("script");
+  script1.async = true;
+  script1.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`;
+  document.head.appendChild(script1);
+
+  const script2 = document.createElement("script");
+  script2.innerHTML = `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+  `;
+  document.head.appendChild(script2);
+}
+
+type GtagWindow = Window & {
+  gtag?: (...args: unknown[]) => void;
+};
+
+function getGtag() {
+  if (typeof window === "undefined") {
+    return undefined;
+  }
+
+  return (window as GtagWindow).gtag;
 }
 
 export function useGA() {
@@ -64,18 +83,20 @@ export function useGA() {
 
   return {
     pageview: (url: string) => {
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("config", process.env.NEXT_PUBLIC_GA_ID, {
-          page_path: url,
-        });
+      const gtag = getGtag();
+
+      if (gtag) {
+        gtag("config", process.env.NEXT_PUBLIC_GA_ID, { page_path: url });
       }
     },
     event: (action: string, category: string, label?: string, value?: number) => {
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", action, {
+      const gtag = getGtag();
+
+      if (gtag) {
+        gtag("event", action, {
           event_category: category,
           event_label: label,
-          value: value,
+          value,
         });
       }
     },

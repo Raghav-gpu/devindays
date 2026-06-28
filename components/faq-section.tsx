@@ -1,13 +1,27 @@
-"use client";
-
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { faqs } from "@/constants/faq";
-import { ChevronDown } from "lucide-react";
+
+function FaqChevron() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-5 w-5 shrink-0 text-gray-600 transition-transform duration-200 group-open:rotate-180"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   return (
     <section className="bg-[#FAFAFA] px-6 py-28 lg:px-8" aria-labelledby="faq-heading">
       <div className="mx-auto max-w-3xl">
@@ -26,14 +40,8 @@ export default function FAQSection() {
               key={faq.question}
               className="border-gray-200 bg-white transition-all hover:border-gray-300"
             >
-              <button
-                type="button"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full text-left"
-                aria-expanded={openIndex === index}
-                aria-controls={`faq-answer-${index}`}
-              >
-                <CardContent className="p-6">
+              <details className="group" open={index === 0}>
+                <summary className="block cursor-pointer list-none p-6 [&::-webkit-details-marker]:hidden">
                   <div className="flex items-start justify-between gap-4">
                     <h3
                       id={`faq-question-${index}`}
@@ -41,25 +49,18 @@ export default function FAQSection() {
                     >
                       {faq.question}
                     </h3>
-                    <ChevronDown
-                      className={`h-5 w-5 shrink-0 text-gray-600 transition-transform ${
-                        openIndex === index ? "rotate-180" : ""
-                      }`}
-                      aria-hidden="true"
-                    />
+                    <FaqChevron />
                   </div>
-                  {openIndex === index && (
-                    <div
-                      id={`faq-answer-${index}`}
-                      className="mt-4 leading-relaxed font-light text-gray-600"
-                      role="region"
-                      aria-labelledby={`faq-question-${index}`}
-                    >
-                      {faq.answer}
-                    </div>
-                  )}
-                </CardContent>
-              </button>
+                </summary>
+                <div
+                  id={`faq-answer-${index}`}
+                  className="px-6 pb-6 leading-relaxed font-light text-gray-600"
+                  role="region"
+                  aria-labelledby={`faq-question-${index}`}
+                >
+                  {faq.answer}
+                </div>
+              </details>
             </Card>
           ))}
         </div>

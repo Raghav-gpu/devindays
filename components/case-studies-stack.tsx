@@ -39,12 +39,11 @@ function CaseStudiesStaticList() {
       <div className="mx-auto w-full max-w-[1400px]">
         <CaseStudiesHeader />
         <div className="flex flex-col gap-[clamp(32px,5vw,48px)]">
-          {caseStudies.map((caseStudy, index) => (
+          {caseStudies.map((caseStudy) => (
             <CaseStudyCard
               key={caseStudy.id}
               caseStudy={caseStudy}
-              priority={index === 0}
-              shouldLoadImage
+              shouldLoadImage={false}
             />
           ))}
         </div>
@@ -55,7 +54,7 @@ function CaseStudiesStaticList() {
 
 function shouldLoadCaseStudyImage(index: number, activeIndex: number, sectionVisible: boolean) {
   if (!sectionVisible) {
-    return index === 0;
+    return false;
   }
 
   return Math.abs(index - activeIndex) <= 1;
@@ -320,7 +319,6 @@ function CaseStudiesStory() {
                     <CaseStudyCard
                       caseStudy={caseStudy}
                       className="h-full w-full max-w-none"
-                      priority={index === 0 && sectionVisible}
                       shouldLoadImage={shouldLoadCaseStudyImage(index, activeIndex, sectionVisible)}
                     />
                   </div>
@@ -347,7 +345,6 @@ function CaseStudiesStory() {
               >
                 <CaseStudyCard
                   caseStudy={caseStudy}
-                  priority={index === 0 && sectionVisible}
                   shouldLoadImage={shouldLoadCaseStudyImage(index, activeIndex, sectionVisible)}
                 />
               </div>

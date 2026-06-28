@@ -11,26 +11,28 @@ import { RiskReversal } from "@/components/risk-reversal";
 import { WhyWorkWithUs } from "@/components/why-work-with-us";
 import { FounderMoment } from "@/components/founder-moment";
 import { FounderMessage } from "@/components/founder-message";
-import { ContactSection } from "@/components/contact-section";
+import {
+  DeferredFocusFlowCaseStudy,
+  DeferredProjectsSection,
+} from "@/components/deferred-below-fold";
 
 const PricingSection = dynamic(
   () => import("@/components/pricing-section").then((mod) => mod.PricingSection),
   { loading: () => <SectionPlaceholder minHeight="900px" /> }
 );
 
-const FocusFlowCaseStudy = dynamic(
-  () => import("@/components/focusflow-case-study").then((mod) => mod.FocusFlowCaseStudy),
-  { loading: () => <SectionPlaceholder minHeight="1200px" /> }
-);
+const FocusFlowCaseStudy = DeferredFocusFlowCaseStudy;
 
-const ProjectsSection = dynamic(
-  () => import("@/components/projects-section").then((mod) => mod.ProjectsSection),
-  { loading: () => <SectionPlaceholder minHeight="800px" /> }
-);
+const ProjectsSection = DeferredProjectsSection;
 
 const FAQSection = dynamic(() => import("@/components/faq-section"), {
   loading: () => <SectionPlaceholder minHeight="700px" />,
 });
+
+const ContactSection = dynamic(
+  () => import("@/components/contact-section").then((mod) => mod.ContactSection),
+  { loading: () => <SectionPlaceholder minHeight="600px" /> }
+);
 
 const Footer = dynamic(
   () => import("@/components/footer").then((mod) => mod.Footer),
@@ -75,13 +77,17 @@ export default function Home() {
         <Suspense fallback={<SectionPlaceholder minHeight="800px" />}>
           <ProjectsSection />
         </Suspense>
-        <WhyWorkWithUs />
-        <FounderMoment />
-        <FounderMessage />
+        <div className="content-auto">
+          <WhyWorkWithUs />
+          <FounderMoment />
+          <FounderMessage />
+        </div>
         <Suspense fallback={<SectionPlaceholder minHeight="700px" />}>
           <FAQSection />
         </Suspense>
-        <ContactSection />
+        <Suspense fallback={<SectionPlaceholder minHeight="600px" />}>
+          <ContactSection />
+        </Suspense>
       </main>
       <Suspense fallback={<SectionPlaceholder minHeight="320px" />}>
         <Footer />

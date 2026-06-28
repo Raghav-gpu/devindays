@@ -1,8 +1,24 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Privacy Policy | DevInDays",
-  description: "Privacy Policy for DevInDays - Fast App Development for Founders",
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Privacy Policy for DevInDays — how we collect, use, and protect your information when you use our app development services.",
+  alternates: {
+    canonical: "https://devindays.com/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy | DevInDays",
+    description:
+      "Privacy Policy for DevInDays — how we collect, use, and protect your information.",
+    url: "https://devindays.com/privacy",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function PrivacyPage() {
