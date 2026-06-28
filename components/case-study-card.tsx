@@ -1,14 +1,17 @@
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import type { CaseStudy } from "@/constants/case-studies";
+import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import Image from "next/image";
 
 type CaseStudyCardProps = {
   caseStudy: CaseStudy;
+  className?: string;
+  variant?: "hero" | "mobile";
+  shadow?: "active" | "background";
 };
 
-function StoreLinks({ caseStudy }: CaseStudyCardProps) {
+function StoreLinks({ caseStudy, compact }: { caseStudy: CaseStudy; compact?: boolean }) {
   const { playStoreUrl, appStoreUrl, name } = caseStudy;
 
   if (!playStoreUrl && !appStoreUrl) {
@@ -16,7 +19,7 @@ function StoreLinks({ caseStudy }: CaseStudyCardProps) {
   }
 
   return (
-    <div className="flex items-center justify-center gap-3 flex-wrap">
+    <div className="flex items-center justify-center gap-3 flex-wrap shrink-0">
       {playStoreUrl && (
         <a
           href={playStoreUrl}
@@ -29,7 +32,7 @@ function StoreLinks({ caseStudy }: CaseStudyCardProps) {
             alt={`Get ${name} on Google Play`}
             width={150}
             height={45}
-            className="h-9 w-auto"
+            className={cn(compact ? "h-8 w-auto" : "h-10 w-auto")}
           />
         </a>
       )}
@@ -45,7 +48,7 @@ function StoreLinks({ caseStudy }: CaseStudyCardProps) {
             alt={`Get ${name} on the App Store`}
             width={150}
             height={45}
-            className="h-9 w-auto"
+            className={cn(compact ? "h-8 w-auto" : "h-10 w-auto")}
           />
         </a>
       )}
@@ -53,36 +56,87 @@ function StoreLinks({ caseStudy }: CaseStudyCardProps) {
   );
 }
 
-export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
+export function CaseStudyCard({
+  caseStudy,
+  className,
+  variant = "hero",
+  shadow = "active",
+}: CaseStudyCardProps) {
+  const isHero = variant === "hero";
+
   return (
-    <Card className="border-gray-200 overflow-hidden hover:border-gray-300 transition-all duration-300 shadow-lg bg-white">
-      <div className="grid md:grid-cols-2 gap-0">
-        <div className="relative bg-gray-50 p-8 md:p-10 flex flex-col items-center justify-center gap-6 min-h-[320px] md:min-h-[420px]">
-          <div className="flex items-center justify-center gap-4 md:gap-5">
+    <article
+      data-case-card
+      className={cn(
+        "flex h-full w-full flex-col overflow-hidden rounded-[22px] border border-gray-200/80 bg-white",
+        shadow === "active"
+          ? "shadow-[0_40px_100px_rgba(0,0,0,0.18)]"
+          : "shadow-[0_16px_48px_rgba(0,0,0,0.07)]",
+        className
+      )}
+    >
+      <div
+        className={cn(
+          "grid h-full min-h-0",
+          isHero ? "grid-cols-1 lg:grid-cols-[2fr_3fr]" : "grid-cols-1"
+        )}
+      >
+        <div
+          className={cn(
+            "flex min-h-0 flex-col items-center justify-center bg-[#F7F7F7]",
+            isHero ? "px-8 py-10 lg:px-10 lg:py-12" : "px-6 py-8 gap-4"
+          )}
+        >
+          <div
+            className={cn(
+              "flex items-center justify-center",
+              isHero
+                ? "h-[88%] max-h-full w-full gap-5 lg:gap-7"
+                : "gap-4 w-full"
+            )}
+          >
             {caseStudy.screenshots.map((image, index) => (
               <div
                 key={`${caseStudy.id}-screenshot-${index}`}
-                className="relative aspect-[9/16] w-36 sm:w-40 md:w-44 lg:w-48 rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-200 transform hover:scale-[1.02] transition-transform duration-300"
+                className={cn(
+                  "relative aspect-[9/16] overflow-hidden rounded-2xl border border-gray-200/80 shadow-[0_12px_40px_rgba(0,0,0,0.12)]",
+                  isHero ? "h-full w-auto max-w-[45%]" : "h-48 w-auto sm:h-56"
+                )}
               >
                 <Image
                   src={image}
                   alt={`${caseStudy.name} screenshot ${index + 1}`}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 640px) 144px, (max-width: 768px) 160px, 192px"
+                  sizes={
+                    isHero
+                      ? "(max-width: 1024px) 40vw, 280px"
+                      : "(max-width: 640px) 45vw, 200px"
+                  }
                   loading="lazy"
                 />
               </div>
             ))}
           </div>
-
-          <StoreLinks caseStudy={caseStudy} />
+          <StoreLinks caseStudy={caseStudy} compact={!isHero} />
         </div>
 
-        <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center">
-          <div className="mb-5">
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              <h3 className="text-xl font-normal text-gray-900">{caseStudy.name}</h3>
+        <div
+          className={cn(
+            "flex min-h-0 flex-col justify-center",
+            isHero ? "px-10 py-12 lg:px-14 lg:py-14" : "px-6 pb-8"
+          )}
+        >
+          <div className={cn(isHero ? "mb-8" : "mb-5")}>
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <h3
+                className={cn(
+                  "font-normal text-gray-900",
+                  isHero ? "text-3xl lg:text-4xl" : "text-2xl"
+                )}
+              >
+                {caseStudy.name}
+              </h3>
               <Badge
                 variant="secondary"
                 className="font-light bg-gray-100 text-gray-900 border-gray-200"
@@ -90,43 +144,85 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
                 {caseStudy.timelineBadge}
               </Badge>
             </div>
-            <p className="text-sm text-gray-600 font-light mb-3">{caseStudy.tagline}</p>
-            <p className="text-base font-normal text-gray-900 mb-2">{caseStudy.headline}</p>
-            <p className="text-sm text-gray-600 font-light leading-relaxed">
+            <p
+              className={cn(
+                "text-gray-600 font-light",
+                isHero ? "text-lg mb-4" : "text-sm mb-3"
+              )}
+            >
+              {caseStudy.tagline}
+            </p>
+            <p
+              className={cn(
+                "font-normal text-gray-900",
+                isHero ? "text-xl mb-3" : "text-base mb-2"
+              )}
+            >
+              {caseStudy.headline}
+            </p>
+            <p
+              className={cn(
+                "text-gray-600 font-light leading-relaxed",
+                isHero ? "text-base max-w-xl" : "text-sm"
+              )}
+            >
               {caseStudy.description}
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 mb-5 pb-5 border-b border-gray-200">
+          <div
+            className={cn(
+              "grid grid-cols-3 gap-3 border-b border-gray-200",
+              isHero ? "mb-8 pb-8" : "mb-5 pb-5"
+            )}
+          >
             {caseStudy.metrics.map((metric) => (
               <div
                 key={`${caseStudy.id}-${metric.label}`}
-                className="rounded-lg bg-gray-50 border border-gray-100 px-2 py-3 text-center"
+                className="rounded-xl bg-gray-50 border border-gray-100 px-3 py-3 text-center"
               >
-                <p className="text-xs text-gray-500 font-light mb-1">{metric.label}</p>
-                <p className="text-sm font-normal text-gray-900">{metric.value}</p>
+                <p className="text-[11px] uppercase tracking-wide text-gray-500 font-light mb-1">
+                  {metric.label}
+                </p>
+                <p className={cn("font-normal text-gray-900", isHero ? "text-sm" : "text-xs")}>
+                  {metric.value}
+                </p>
               </div>
             ))}
           </div>
 
-          <div className="mb-5">
-            <p className="text-sm font-medium text-gray-900 mb-3">Key Features</p>
+          <div>
+            <p
+              className={cn(
+                "font-medium text-gray-900",
+                isHero ? "text-sm mb-4" : "text-xs mb-3"
+              )}
+            >
+              Key Features
+            </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {caseStudy.features.map((feature) => (
                 <div
                   key={`${caseStudy.id}-${feature}`}
-                  className="flex items-center gap-2.5 rounded-lg border border-gray-100 bg-gray-50/80 px-3 py-2.5"
+                  className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/80 px-3 py-2.5"
                 >
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gray-900">
                     <Check className="h-3 w-3 text-white" strokeWidth={2.5} aria-hidden="true" />
                   </span>
-                  <span className="text-sm text-gray-700 font-light leading-snug">{feature}</span>
+                  <span
+                    className={cn(
+                      "text-gray-700 font-light leading-snug",
+                      isHero ? "text-sm" : "text-xs"
+                    )}
+                  >
+                    {feature}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-    </Card>
+    </article>
   );
 }

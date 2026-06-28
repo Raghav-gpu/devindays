@@ -60,21 +60,21 @@ function StoreLinks({ project }: ProjectCardProps) {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card className="border-gray-200 overflow-hidden hover:border-gray-300 transition-all duration-300 hover:shadow-2xl bg-white h-full shadow-lg flex flex-col">
+    <Card className="border-gray-200 overflow-hidden hover:border-gray-300 transition-all duration-300 hover:shadow-2xl bg-white h-full shadow-lg flex flex-col min-h-[420px] sm:min-h-[440px] md:min-h-0">
       <div className="relative w-full bg-gray-50">
-        <div className="flex flex-col items-center justify-center p-6 gap-4">
-          <div className="flex items-center justify-center gap-3 w-full">
+        <div className="flex flex-col items-center justify-center p-5 sm:p-6 md:p-6 gap-4">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 w-full">
             {project.images.map((image, index) => (
               <div
                 key={`${project.id}-image-${index}`}
-                className="relative aspect-[9/16] flex-1 max-w-[140px] rounded-xl overflow-hidden shadow-lg border border-gray-200"
+                className="relative aspect-[9/16] flex-1 max-w-[175px] sm:max-w-[195px] md:max-w-[140px] rounded-xl overflow-hidden shadow-lg border border-gray-200"
               >
                 <Image
                   src={image}
                   alt={`${project.title} screenshot ${index + 1}`}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 40vw, 140px"
+                  sizes="(max-width: 768px) 42vw, 140px"
                   loading="lazy"
                 />
               </div>
@@ -84,10 +84,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </div>
 
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-3 px-5 sm:px-6 md:px-6">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <CardTitle className="text-xl font-normal mb-1 text-gray-900">
+            <CardTitle className="text-xl sm:text-2xl font-normal mb-1 text-gray-900">
               {project.title}
             </CardTitle>
             {project.badge && (
@@ -110,8 +110,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </CardHeader>
 
-      <CardContent className="pt-0 mt-auto">
-        <CardDescription className="text-sm text-gray-600 font-light leading-relaxed">
+      <CardContent className="pt-0 mt-auto px-5 sm:px-6 md:px-6">
+        <CardDescription className="text-sm sm:text-base text-gray-600 font-light leading-relaxed">
           {project.description}
         </CardDescription>
       </CardContent>

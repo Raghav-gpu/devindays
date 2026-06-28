@@ -44,21 +44,21 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
 
   return (
     <div className="relative">
-      <Carousel
-        setApi={setApi}
-        opts={{
-          align: "start",
-          loop: true,
-          slidesToScroll: 1,
-        }}
-        className="w-full"
-      >
-        <div className="relative px-12 md:px-16">
-          <CarouselContent className="-ml-3 md:-ml-4">
+      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+        <Carousel
+          setApi={setApi}
+          opts={{
+            align: "center",
+            loop: true,
+            slidesToScroll: 1,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-3 md:-ml-4 py-4 md:py-6">
             {projects.map((project) => (
               <CarouselItem
                 key={project.id}
-                className="pl-3 md:pl-4 md:basis-1/2 lg:basis-1/3"
+                className="pl-3 md:pl-4 basis-[92%] sm:basis-[88%] md:basis-1/2 lg:basis-1/3"
               >
                 <ProjectCard project={project} />
               </CarouselItem>
@@ -71,7 +71,7 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
             size="icon"
             aria-label="Previous project"
             onClick={() => api?.scrollPrev()}
-            className="absolute left-0 top-1/2 z-20 h-11 w-11 -translate-y-1/2 rounded-full border-2 border-gray-200 bg-white text-gray-900 shadow-lg hover:bg-gray-50 hover:text-gray-900"
+            className="absolute left-3 md:left-4 top-1/2 z-20 h-10 w-10 md:h-11 md:w-11 -translate-y-1/2 rounded-full border-2 border-gray-200 bg-white/95 text-gray-900 shadow-md hover:bg-gray-50 hover:text-gray-900 backdrop-blur-sm"
           >
             <ChevronLeft className="h-5 w-5" aria-hidden="true" />
           </Button>
@@ -82,12 +82,12 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
             size="icon"
             aria-label="Next project"
             onClick={() => api?.scrollNext()}
-            className="absolute right-0 top-1/2 z-20 h-11 w-11 -translate-y-1/2 rounded-full border-2 border-gray-200 bg-white text-gray-900 shadow-lg hover:bg-gray-50 hover:text-gray-900"
+            className="absolute right-3 md:right-4 top-1/2 z-20 h-10 w-10 md:h-11 md:w-11 -translate-y-1/2 rounded-full border-2 border-gray-200 bg-white/95 text-gray-900 shadow-md hover:bg-gray-50 hover:text-gray-900 backdrop-blur-sm"
           >
             <ChevronRight className="h-5 w-5" aria-hidden="true" />
           </Button>
-        </div>
-      </Carousel>
+        </Carousel>
+      </div>
 
       {slideCount > 1 && (
         <div className="mt-8 flex items-center justify-center gap-2">
