@@ -11,36 +11,86 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "moms-into-fitness",
-    title: "Moms Into Fitness",
+    id: "krexhe",
+    title: "Krexhe",
     description:
-      "Fitness app focused on postpartum workouts and structured health programs for new mothers.",
-    badge: null,
-    featured: false,
-    playStoreUrl: null,
+      "Women's safety and emergency response platform with live location tracking and SOS features.",
+    badge: "Safety",
+    featured: true,
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.krexhe.app",
     appStoreUrl: null,
-    images: ["/mom-into-fitness-01.webp", "/mom-into-fitness-02.webp"],
+    images: ["/mockups/mockup-04.png"],
   },
+
   {
-    id: "baby-monitor-3g",
-    title: "Baby Monitor 3G",
+    id: "homeyfixit-pro",
+    title: "HomeyFixIt Professional",
     description:
-      "Universal video and audio baby monitor for your phone, tablet, or computer. Hear every noise, stream live video, and soothe your child remotely.",
-    badge: null,
+      "Dedicated provider app for managing bookings, earnings, schedules, and customer requests.",
+    badge: "Provider",
     featured: false,
-    playStoreUrl: null,
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.homeyfixit.vendor",
     appStoreUrl: null,
-    images: ["/baby_01.webp", "/baby_02.webp"],
+    images: ["/mockups/mockup-05.png"],
   },
+
   {
-    id: "buddy-budget-planner",
-    title: "Buddy – Money Budget Planner",
+    id: "sailor-rider",
+    title: "Sailor Rider",
     description:
-      "Simplifies monthly financial tracking and spending insights. Helps users stay on budget.",
-    badge: null,
+      "Delivery partner app with live navigation, order management, rider wallet, and earnings.",
+    badge: "Delivery",
+    featured: false,
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.sailor.rider",
+    appStoreUrl: null,
+    images: ["/mockups/mockup-06.png"],
+  },
+
+  {
+    id: "homingo",
+    title: "Homingo",
+    description:
+      "Home services marketplace for booking trusted local professionals with real-time updates.",
+    badge: "Marketplace",
     featured: false,
     playStoreUrl: null,
     appStoreUrl: null,
-    images: ["/buddy-01.webp", "/buddy-02.webp"],
+    images: ["/mockups/mockup-07.png"],
+  },
+
+  {
+    id: "navnirvana",
+    title: "NavNirvana",
+    description:
+      "Investment and wealth management platform with live market insights and portfolio tracking.",
+    badge: "Fintech",
+    featured: false,
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.navnirvana.app",
+    appStoreUrl: null,
+    images: ["/mockups/mockup-08.png"],
+  },
+
+  {
+    id: "trustai",
+    title: "TrustAI",
+    description:
+      "AI-powered document verification and fraud detection platform built for modern businesses.",
+    badge: "AI",
+    featured: false,
+    playStoreUrl: null,
+    appStoreUrl: null,
+    images: ["/mockups/mockup-09.png"],
+  },
+
+  {
+    id: "dater",
+    title: "Dater",
+    description:
+      "Modern dating platform focused on meaningful connections with a privacy-first experience.",
+    badge: "Social",
+    featured: false,
+    playStoreUrl: null,
+    appStoreUrl: null,
+    images: ["/mockups/mockup-10.png"],
   },
 ];

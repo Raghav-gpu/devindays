@@ -15,52 +15,23 @@ type ProjectCardProps = {
   className?: string;
 };
 
-function StoreLinks({ project }: ProjectCardProps) {
-  const { playStoreUrl, appStoreUrl, title } = project;
-
-  if (!playStoreUrl && !appStoreUrl) {
-    return null;
-  }
-
-  return (
-    <div className="flex items-center justify-center gap-3 flex-wrap pt-2">
-      {playStoreUrl && (
-        <a
-          href={playStoreUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block"
-        >
-          <Image
-            src="/google-play-badge.png"
-            alt={`Get ${title} on Google Play`}
-            width={150}
-            height={45}
-            className="h-9 w-auto"
-          />
-        </a>
-      )}
-      {appStoreUrl && (
-        <a
-          href={appStoreUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block"
-        >
-          <Image
-            src="/app-store-badge.png"
-            alt={`Get ${title} on the App Store`}
-            width={150}
-            height={45}
-            className="h-9 w-auto"
-          />
-        </a>
-      )}
-    </div>
-  );
-}
-
 export function ProjectCard({ project, className }: ProjectCardProps) {
+  const mockupImage = (
+    <Image
+      src={project.images[0]}
+      alt={`${project.title} app mockup`}
+      width={600}
+      height={1000}
+      className={cn(
+        "h-auto max-h-[min(58vw,340px)] w-[clamp(180px,78vw,300px)] object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.14)] sm:max-h-[min(54vw,360px)] sm:w-[clamp(200px,62vw,320px)] md:max-h-[min(52vw,460px)] md:w-[clamp(240px,90%,400px)] lg:max-h-[min(50vw,520px)] lg:w-[clamp(260px,94%,440px)] xl:max-h-[540px] xl:w-[clamp(280px,95%,460px)] min-[1400px]:max-h-[580px] min-[1400px]:w-[clamp(300px,96%,480px)]",
+        project.playStoreUrl && "transition-opacity duration-200 hover:opacity-95"
+      )}
+      sizes="(max-width: 768px) 78vw, (max-width: 1024px) 48vw, (max-width: 1280px) 34vw, 460px"
+      loading="lazy"
+      draggable={false}
+    />
+  );
+
   return (
     <Card
       className={cn(
@@ -69,25 +40,23 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
       )}
     >
       <div className="relative w-full shrink-0 bg-gray-50">
-        <div className="flex flex-col items-center justify-center gap-4 p-[clamp(16px,2vw,24px)]">
-          <div className="grid w-full grid-cols-2 gap-[clamp(8px,1.5vw,16px)]">
-            {project.images.map((image, index) => (
-              <div
-                key={`${project.id}-image-${index}`}
-                className="relative aspect-[9/16] w-full overflow-hidden rounded-xl border border-gray-200 shadow-lg"
+        <div className="flex flex-col items-center justify-center gap-4 p-[clamp(12px,1.5vw,20px)]">
+          <div className="flex min-h-[240px] w-full items-center justify-center sm:min-h-[260px] md:min-h-[360px] lg:min-h-[420px] xl:min-h-[460px] min-[1400px]:min-h-[500px]">
+            {project.playStoreUrl ? (
+              <a
+                href={project.playStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                draggable={false}
+                aria-label={`View ${project.title} on Google Play`}
+                className="inline-flex rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900/20 focus-visible:ring-offset-2"
               >
-                <Image
-                  src={image}
-                  alt={`${project.title} screenshot ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 42vw, (max-width: 1280px) 28vw, 220px"
-                  loading="lazy"
-                />
-              </div>
-            ))}
+                {mockupImage}
+              </a>
+            ) : (
+              mockupImage
+            )}
           </div>
-          <StoreLinks project={project} />
         </div>
       </div>
 

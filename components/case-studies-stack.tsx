@@ -11,6 +11,25 @@ const HOLD_RATIO = 0.3;
 const TRANSITION_RATIO = 1 - HOLD_RATIO;
 const SCRUB_AMOUNT = 0.9;
 const PIN_VIEWPORT_RATIO = 1.3;
+const MOCKUP_ANIM_DURATION = 0.7;
+
+function getCardMockup(card: HTMLElement | null | undefined) {
+  return card?.querySelector<HTMLElement>("[data-case-mockup]") ?? null;
+}
+
+function setMockupState(mockup: HTMLElement | null, active: boolean) {
+  if (!mockup) {
+    return;
+  }
+
+  gsap.set(mockup, {
+    y: active ? 0 : 40,
+    opacity: active ? 1 : 0,
+    scale: active ? 1 : 0.96,
+    transformOrigin: "center center",
+    force3D: true,
+  });
+}
 
 function CaseStudiesHeader() {
   return (
@@ -77,22 +96,16 @@ function CaseStudiesStory() {
       const segmentScroll = window.innerHeight * PIN_VIEWPORT_RATIO;
       const endDistance = (cards.length - 1) * segmentScroll;
 
-      gsap.set(cards[0], {
-        yPercent: 0,
-        scale: 1,
-        opacity: 1,
-        transformOrigin: "center center",
-        force3D: true,
-      });
-
-      cards.slice(1).forEach((card) => {
+      cards.forEach((card, index) => {
         gsap.set(card, {
-          yPercent: 120,
-          scale: 0.98,
-          opacity: 0.95,
+          yPercent: index === 0 ? 0 : 120,
+          scale: index === 0 ? 1 : 0.98,
+          opacity: index === 0 ? 1 : 0.95,
           transformOrigin: "center center",
           force3D: true,
         });
+
+        setMockupState(getCardMockup(card), index === 0);
       });
 
       const timeline = gsap.timeline({
@@ -110,6 +123,7 @@ function CaseStudiesStory() {
       for (let index = 1; index < cards.length; index += 1) {
         const segmentStart = index - 1;
         const transitionStart = segmentStart + HOLD_RATIO;
+        const mockup = getCardMockup(cards[index]);
 
         timeline.to(
           cards[index],
@@ -133,6 +147,20 @@ function CaseStudiesStory() {
           },
           transitionStart
         );
+
+        if (mockup) {
+          timeline.to(
+            mockup,
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: MOCKUP_ANIM_DURATION,
+              ease: "power2.out",
+            },
+            transitionStart
+          );
+        }
       }
     });
 
@@ -140,6 +168,8 @@ function CaseStudiesStory() {
       const cards = mobileCardRefs.current.filter(Boolean) as HTMLDivElement[];
 
       cards.forEach((card) => {
+        const mockup = getCardMockup(card);
+
         gsap.fromTo(
           card,
           {
@@ -159,6 +189,30 @@ function CaseStudiesStory() {
             },
           }
         );
+
+        if (mockup) {
+          gsap.fromTo(
+            mockup,
+            {
+              y: 40,
+              opacity: 0,
+              scale: 0.96,
+              force3D: true,
+            },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 88%",
+                end: "top 55%",
+                scrub: SCRUB_AMOUNT,
+              },
+            }
+          );
+        }
       });
     });
 

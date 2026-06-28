@@ -7,36 +7,92 @@ export type CaseStudy = {
   description: string;
   metrics: Array<{ label: string; value: string }>;
   features: string[];
-  screenshots: string[];
+  mockup: string;
+  accentColor: string;
+  platforms: string[];
   playStoreUrl?: string;
   appStoreUrl?: string;
 };
 
-const focusFlowCaseStudy: Omit<CaseStudy, "id"> = {
-  name: "FocusFlow",
-  tagline:
-    "Productivity app with Google Calendar sync, AI task assistant, and social accountability.",
-  timelineBadge: "Built in 18 days",
-  headline: "From idea to live users in 18 days",
-  description:
-    "A complete productivity app with Google Calendar integration, AI-powered task assistance, and social accountability features. Shipped to production with real users.",
-  metrics: [
-    { label: "Platform", value: "Android / iOS" },
-    { label: "Timeline", value: "18 days" },
-    { label: "Scope", value: "MVP → Live users" },
-  ],
-  features: [
-    "Google Calendar sync",
-    "AI task assistant",
-    "Social accountability",
-    "Cross-platform",
-  ],
-  screenshots: ["/focusflow_01.png", "/focusflow_02.png"],
-  playStoreUrl: "https://play.google.com/store/apps/details?id=com.focusflow.focus",
-};
-
 export const caseStudies: CaseStudy[] = [
-  { id: "focusflow-1", ...focusFlowCaseStudy },
-  { id: "focusflow-2", ...focusFlowCaseStudy },
-  { id: "focusflow-3", ...focusFlowCaseStudy },
+  {
+    id: "homeyfixit",
+    name: "HomeyFixIt",
+    tagline:
+      "On-demand home services platform connecting homeowners with trusted local professionals for repairs, maintenance, and everyday services.",
+    timelineBadge: "Built in 24 days",
+    headline: "Built a production-ready home services marketplace",
+    description:
+    "HomeyFixIt is a home services platform with customer and provider apps, real-time booking, live tracking, secure payments, and an intuitive experience for homeowners and professionals.",
+    metrics: [
+      { label: "Platform", value: "Android / iOS" },
+      { label: "Timeline", value: "24 days" },
+      { label: "Scope", value: "Marketplace MVP" },
+    ],
+    features: [
+      "Customer & Provider Apps",
+      "Real-time Booking & Tracking",
+      "Secure Online Payments",
+      "Live Location & Notifications",
+    ],
+    mockup: "/mockups/mockup-01.png",
+    accentColor: "rgba(249, 115, 22, 0.18)",
+    platforms: ["Android", "iOS", "Flutter", "Firebase", "Live"],
+    playStoreUrl:
+      "https://play.google.com/store/apps/details?id=com.homeyfixit.customer",
+  },
+
+  {
+    id: "makemyjodi",
+    name: "MakeMyJodi",
+    tagline:
+      "Modern matrimony platform helping individuals and families find meaningful lifelong relationships through trusted matchmaking.",
+    timelineBadge: "Built in 21 days",
+    headline: "A modern matchmaking platform built for meaningful connections",
+    description:
+      "MakeMyJodi streamlines the matchmaking journey with verified profiles, intelligent search, personalized recommendations, secure messaging, and privacy-focused features. Built to modernize traditional matrimony with a clean, scalable mobile experience.",
+    metrics: [
+      { label: "Platform", value: "Android / iOS" },
+      { label: "Timeline", value: "21 days" },
+      { label: "Scope", value: "Matrimonial Platform" },
+    ],
+    features: [
+      "Verified User Profiles",
+      "Advanced Match Discovery",
+      "Secure Chat & Interests",
+      "Privacy-first Experience",
+    ],
+    mockup: "/mockups/mockup-02.png",
+    accentColor: "rgba(236, 72, 153, 0.18)",
+    platforms: ["Android", "iOS", "Flutter", "Firebase", "Live"],
+    playStoreUrl:
+      "https://play.google.com/store/apps/details?id=com.makemyjodi.app",
+  },
+
+  {
+    id: "sailor-delivery",
+    name: "Sailor Delivery",
+    tagline:
+      "Hyperlocal delivery platform connecting customers, riders, and businesses through fast and reliable last-mile logistics.",
+    timelineBadge: "Built in 28 days",
+    headline: "A scalable delivery ecosystem for modern businesses",
+    description:
+      "Sailor Delivery includes dedicated Customer, Rider, and Admin applications with live order tracking, rider earnings, wallet management, notifications, route optimization, and delivery management. Built to support high-volume logistics with a smooth user experience.",
+    metrics: [
+      { label: "Platform", value: "Android / iOS" },
+      { label: "Timeline", value: "28 days" },
+      { label: "Scope", value: "Delivery Platform" },
+    ],
+    features: [
+      "Real-time Order Tracking",
+      "Rider Earnings & Wallet",
+      "Delivery Management",
+      "Admin Dashboard",
+    ],
+    mockup: "/mockups/mockup-03.png",
+    accentColor: "rgba(59, 130, 246, 0.18)",
+    platforms: ["Android", "iOS", "Flutter", "Firebase", "Live"],
+    // Add the official Play Store URL once the app is published.
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.sailor.customer",
+  },
 ];

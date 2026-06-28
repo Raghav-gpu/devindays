@@ -143,23 +143,25 @@ function FadeIn({
 
 function PricingFeatureItem({ text }: PricingFeature) {
   return (
-    <div className="flex items-start gap-2.5">
+    <div className="flex min-h-[44px] items-start gap-2.5">
       <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-slate-100">
         <Check className="h-3 w-3 text-slate-900" strokeWidth={2.5} aria-hidden="true" />
       </span>
-      <p className="max-w-[34ch] text-[15px] leading-[1.5] text-slate-700">{text}</p>
+      <p className="min-w-0 text-[15px] leading-[1.5] text-slate-700 lg:text-[15px] min-[1200px]:text-[15px]">
+        {text}
+      </p>
     </div>
   );
 }
 
 function PricingTierCard({ tier, index }: { tier: PricingTier; index: number }) {
   return (
-    <FadeIn delay={index * 100} className="h-full">
+    <FadeIn delay={index * 100} className="flex h-full">
       <div
         className={cn(
-          "group relative flex h-full min-h-0 max-h-[700px] flex-col rounded-[20px] border border-slate-200/80 bg-white p-8 shadow-[0_12px_40px_rgba(15,23,42,0.08)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(15,23,42,0.12)] motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+          "group relative flex h-full w-full flex-col rounded-[20px] border border-slate-200/80 bg-white p-6 shadow-[0_12px_40px_rgba(15,23,42,0.08)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(15,23,42,0.12)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 lg:p-7 min-[1400px]:p-8",
           tier.highlighted &&
-            "z-10 border-slate-700/80 bg-[#FCFCFD] shadow-[0_16px_48px_rgba(15,23,42,0.12),0_0_0_1px_rgba(15,23,42,0.04)] hover:shadow-[0_24px_60px_rgba(15,23,42,0.16),0_0_32px_rgba(15,23,42,0.06)] lg:scale-[1.03] lg:hover:-translate-y-1.5 border-2"
+            "z-10 border-slate-300/80 bg-[#FCFCFD] shadow-[0_16px_48px_rgba(15,23,42,0.12),0_0_0_1px_rgba(15,23,42,0.04)] hover:shadow-[0_24px_60px_rgba(15,23,42,0.16),0_0_32px_rgba(15,23,42,0.06)] min-[1400px]:scale-[1.03] min-[1400px]:hover:-translate-y-1.5"
         )}
       >
         {tier.badge && (
@@ -170,32 +172,32 @@ function PricingTierCard({ tier, index }: { tier: PricingTier; index: number }) 
           </div>
         )}
 
-        <div className={cn("flex h-full flex-col", tier.badge && "pt-2")}>
-          <div>
-            <h3 className="text-[clamp(1.625rem,2vw,2.625rem)] font-semibold leading-tight text-slate-900">
+        <div className={cn("flex h-full min-h-0 flex-col", tier.badge && "pt-2")}>
+          <div className="shrink-0">
+            <h3 className="text-[clamp(1.5rem,1.8vw,1.625rem)] font-semibold leading-tight text-slate-900">
               {tier.title}
             </h3>
-            <p className="mt-4 line-clamp-2 max-w-[28ch] text-base leading-relaxed text-slate-500">
+            <p className="mt-3 min-h-[3rem] line-clamp-2 text-[15px] leading-relaxed text-slate-500 lg:mt-4 lg:text-base">
               {tier.description}
             </p>
           </div>
 
-          <div className="mt-5 flex items-end gap-2">
-            <span className="text-[clamp(2.375rem,2.5vw,1.75rem)] font-bold leading-none tracking-tight text-gray-900">
+          <div className="mt-5 flex min-h-[3.25rem] shrink-0 items-end gap-2 lg:mt-5">
+            <span className="text-[clamp(2rem,1.8vw,2.125rem)] font-bold leading-none tracking-tight text-slate-900">
               {tier.price}
             </span>
             {tier.priceSuffix && (
-              <span className="pb-1 text-sm font-medium text-slate-400">{tier.priceSuffix}</span>
+              <span className="pb-1 shrink-0 text-sm font-medium text-slate-400">{tier.priceSuffix}</span>
             )}
           </div>
 
-          <div className="mt-5 flex flex-col gap-[14px]">
+          <div className="mt-5 flex shrink-0 flex-col gap-[14px] lg:mt-5">
             {tier.features.map((feature) => (
               <PricingFeatureItem key={feature.text} text={feature.text} />
             ))}
           </div>
 
-          <div className="mt-auto pt-5">
+          <div className="mt-auto flex shrink-0 flex-col pt-5 lg:pt-6">
             <div className="rounded-xl bg-slate-50 px-3.5 py-3">
               <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
                 Best for
@@ -206,7 +208,7 @@ function PricingTierCard({ tier, index }: { tier: PricingTier; index: number }) 
             <Button
               variant={tier.highlighted ? "default" : "outline"}
               className={cn(
-                "mt-4 h-12 w-full rounded-2xl text-[15px] font-medium transition-all duration-300",
+                "mt-4 h-12 w-full shrink-0 rounded-2xl px-4 text-[15px] font-medium whitespace-nowrap transition-all duration-300",
                 tier.highlighted
                   ? "bg-slate-900 text-white hover:bg-slate-800"
                   : "border-slate-200 bg-white text-slate-900 hover:border-slate-300 hover:bg-slate-50"
@@ -218,10 +220,10 @@ function PricingTierCard({ tier, index }: { tier: PricingTier; index: number }) 
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={tier.ctaAriaLabel}
-                className="inline-flex items-center justify-center gap-2"
+                className="inline-flex h-12 w-full items-center justify-center gap-2"
               >
-                {tier.ctaLabel}
-                <MoveRight className="h-4 w-4" aria-hidden="true" />
+                <span className="truncate">{tier.ctaLabel}</span>
+                <MoveRight className="h-4 w-4 shrink-0" aria-hidden="true" />
               </Link>
             </Button>
           </div>
@@ -233,25 +235,25 @@ function PricingTierCard({ tier, index }: { tier: PricingTier; index: number }) 
 
 function Pricing() {
   return (
-    <div className="w-full py-[clamp(96px,12vw,160px)]">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-8">
+    <div className="w-full py-[clamp(80px,8vw,96px)]">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-8">
         <FadeIn className="mx-auto max-w-3xl text-center">
-          <h2 className="text-[clamp(2.125rem,4vw,3.5rem)] font-semibold tracking-tight text-slate-900">
+          <h2 className="text-[clamp(2rem,3.5vw,3rem)] font-semibold tracking-tight text-slate-900">
             Pricing
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-[17px] leading-relaxed text-slate-500">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-500 lg:text-[17px]">
             Clear pricing. No surprises. Most projects fall into one of the options below.
           </p>
         </FadeIn>
 
-        <div className="mx-auto mt-20 grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-10">
+        <div className="mx-auto mt-14 grid w-full grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-6 min-[1400px]:gap-7">
           {pricingTiers.map((tier, index) => (
             <div
               key={tier.title}
               className={cn(
-                "h-full",
+                "flex h-full min-h-0",
                 index === 2 &&
-                  "md:col-span-2 md:mx-auto md:w-full md:max-w-[min(100%,480px)] lg:col-span-1 lg:max-w-none"
+                  "md:col-span-2 md:mx-auto md:w-full md:max-w-[min(100%,420px)] lg:col-span-1 lg:max-w-none"
               )}
             >
               <PricingTierCard tier={tier} index={index} />
@@ -259,7 +261,7 @@ function Pricing() {
           ))}
         </div>
 
-        <FadeIn delay={300} className="mt-20 space-y-5 text-center">
+        <FadeIn delay={300} className="mt-14 space-y-4 text-center">
           <p className="mx-auto max-w-2xl text-sm leading-relaxed text-slate-500">
             We take on a limited number of projects each month to ensure quality and timelines
             don&apos;t slip.

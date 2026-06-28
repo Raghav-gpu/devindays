@@ -9,6 +9,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import type { Project } from "@/constants/projects";
+import WheelGesturesPlugin from "embla-carousel-wheel-gestures";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -35,10 +36,12 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
     onSelect();
     api.on("reInit", onSelect);
     api.on("select", onSelect);
+    api.on("scroll", onSelect);
 
     return () => {
       api.off("reInit", onSelect);
       api.off("select", onSelect);
+      api.off("scroll", onSelect);
     };
   }, [api]);
 
@@ -47,12 +50,18 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
       <div className="relative overflow-hidden">
         <Carousel
           setApi={setApi}
+          plugins={[WheelGesturesPlugin({ forceWheelAxis: "x" })]}
           opts={{
             align: "center",
             loop: true,
-            slidesToScroll: 1,
+            dragFree: true,
+            skipSnaps: true,
+            containScroll: false,
+            watchDrag: true,
+            dragThreshold: 5,
+            duration: 25,
           }}
-          className="w-full"
+          className="w-full [&_.is-wheel-dragging]:cursor-grabbing"
         >
           <CarouselContent className="-ml-3 md:-ml-4 py-4 md:py-6">
             {projects.map((project) => (
