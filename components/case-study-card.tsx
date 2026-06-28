@@ -11,6 +11,7 @@ type CaseStudyCardProps = {
   shadow?: "active" | "background";
   priority?: boolean;
   shouldLoadImage?: boolean;
+  pinned?: boolean;
 };
 
 function PlatformChips({ platforms }: { platforms: string[] }) {
@@ -81,10 +82,12 @@ function DeviceMockupHero({
   caseStudy,
   priority = false,
   shouldLoadImage = true,
+  pinned = false,
 }: {
   caseStudy: CaseStudy;
   priority?: boolean;
   shouldLoadImage?: boolean;
+  pinned?: boolean;
 }) {
   const mockupImage = shouldLoadImage ? (
     <Image
@@ -95,9 +98,9 @@ function DeviceMockupHero({
       className={cn(
         "h-auto max-h-[min(72vw,420px)] w-[clamp(280px,78vw,420px)] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.18)]",
         "md:max-h-[min(52vw,460px)] md:w-[clamp(300px,52vw,460px)]",
-        "lg:max-h-[min(64vh,600px)] lg:w-[clamp(320px,48vw,720px)]",
-        "min-[1200px]:max-h-[min(62vh,480px)] min-[1200px]:w-[clamp(300px,32vw,480px)]",
-        "min-[1400px]:max-h-[min(68vh,520px)] min-[1400px]:w-[clamp(340px,36vw,560px)]",
+        "lg:max-h-[min(54vh,520px)] lg:w-[clamp(280px,42vw,620px)]",
+        "min-[1200px]:max-h-[min(52vh,440px)] min-[1200px]:w-[clamp(260px,28vw,420px)]",
+        "min-[1400px]:max-h-[min(56vh,460px)] min-[1400px]:w-[clamp(300px,32vw,480px)]",
         caseStudy.playStoreUrl && "transition-opacity duration-200 hover:opacity-95"
       )}
       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 78vw, (max-width: 1200px) 50vw, 40vw"
@@ -115,7 +118,12 @@ function DeviceMockupHero({
   );
 
   return (
-    <div className="relative flex min-h-[320px] w-full items-center justify-center overflow-hidden md:min-h-[380px] lg:min-h-0 lg:h-full">
+    <div
+      className={cn(
+        "relative flex w-full items-center justify-center overflow-hidden",
+        pinned ? "min-h-0 flex-1" : "min-h-[320px] md:min-h-[380px] lg:min-h-0 lg:h-full"
+      )}
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 scale-110 opacity-90"
@@ -152,13 +160,15 @@ export const CaseStudyCard = memo(function CaseStudyCard({
   shadow = "active",
   priority = false,
   shouldLoadImage = true,
+  pinned = false,
 }: CaseStudyCardProps) {
   return (
     <article
       data-case-card
       className={cn(
-        "mx-auto flex h-full w-full flex-col overflow-hidden rounded-[22px] border border-gray-200/80 bg-white",
-        "md:max-w-[900px] lg:max-w-[1180px] min-[1400px]:max-w-[1400px]",
+        "mx-auto flex w-full flex-col overflow-hidden rounded-[22px] border border-gray-200/80 bg-white",
+        pinned && "h-full",
+        "md:max-w-[900px] lg:max-w-[1080px] min-[1400px]:max-w-[1240px]",
         shadow === "active"
           ? "shadow-[0_40px_100px_rgba(0,0,0,0.18)]"
           : "shadow-[0_16px_48px_rgba(0,0,0,0.07)]",
@@ -167,43 +177,55 @@ export const CaseStudyCard = memo(function CaseStudyCard({
     >
       <div
         className={cn(
-          "grid h-full min-h-0 grid-cols-1",
+          "grid grid-cols-1",
+          pinned && "h-full min-h-0 items-stretch",
           "lg:grid-cols-[minmax(0,1fr)_minmax(420px,1fr)]",
           "min-[1200px]:grid-cols-[52fr_minmax(420px,48fr)]",
           "min-[1400px]:grid-cols-[55fr_minmax(420px,45fr)]"
         )}
       >
-        <div className="relative overflow-hidden bg-[#FAFAFA] p-[clamp(16px,2.5vw,28px)] lg:p-6 min-[1200px]:p-7 min-[1400px]:p-8">
+        <div
+          className={cn(
+            "relative overflow-hidden bg-[#FAFAFA] p-[clamp(16px,2.5vw,28px)] lg:p-6 min-[1200px]:p-7 min-[1400px]:p-8",
+            pinned && "flex h-full min-h-0 flex-col"
+          )}
+        >
           <DeviceMockupHero
             caseStudy={caseStudy}
             priority={priority}
             shouldLoadImage={shouldLoadImage}
+            pinned={pinned}
           />
         </div>
 
-        <div className="flex min-h-0 min-w-0 flex-col justify-center overflow-hidden p-[clamp(20px,3vw,36px)] lg:min-w-[420px] lg:gap-0 lg:p-5 min-[1200px]:p-6 min-[1400px]:p-7">
+        <div
+          className={cn(
+            "flex min-w-0 flex-col p-[clamp(20px,3vw,36px)] lg:min-w-[420px] lg:p-5 min-[1200px]:p-6 min-[1400px]:p-7",
+            pinned ? "h-full min-h-0 justify-center" : "justify-center"
+          )}
+        >
           <PlatformChips platforms={caseStudy.platforms} />
 
           <div>
             <div className="mb-4 flex flex-wrap items-center gap-2 md:gap-3">
-              <h3 className="text-[clamp(1.625rem,2.5vw,2.375rem)] leading-tight font-normal text-gray-900">
+              <h3 className="text-[clamp(1.625rem,2.5vw,1.375rem)] leading-tight font-normal text-gray-900">
                 {caseStudy.name}
               </h3>
               <Badge
                 variant="secondary"
-                className="max-w-full shrink border-gray-200 bg-gray-100 text-[13px] font-light text-gray-900 sm:text-sm"
+                className="max-w-full shrink border-gray-200 bg-gray-100 text-[11px] font-light text-gray-900 sm:text-xs"
               >
                 {caseStudy.timelineBadge}
               </Badge>
             </div>
-
+{/* 
             <p className="mb-3 max-w-[65ch] text-[clamp(1rem,1.2vw,1.125rem)] leading-relaxed font-light text-gray-600 lg:mb-3">
               {caseStudy.tagline}
-            </p>
-            <p className="mb-3 max-w-[65ch] text-[clamp(1.0625rem,1.4vw,1.25rem)] font-normal text-gray-900 lg:mb-3">
+            </p> */}
+            <p className="mb-3 max-w-[65ch] text-[clamp(1.0625rem,1.4vw,0.875rem)] font-normal text-gray-900 lg:mb-3">
               {caseStudy.headline}
             </p>
-            <p className="max-w-[65ch] text-[clamp(1rem,1.2vw,1.125rem)] leading-relaxed font-light text-gray-600">
+            <p className="max-w-[65ch] text-[clamp(1rem,1.2vw,0.875rem)] leading-relaxed font-light text-gray-600">
               {caseStudy.description}
             </p>
 

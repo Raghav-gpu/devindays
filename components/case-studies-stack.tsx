@@ -305,8 +305,8 @@ function CaseStudiesStory() {
 
         <div ref={desktopTrackRef} className="relative">
           <div ref={desktopPinRef} className="relative h-svh w-full overflow-hidden">
-            <div className="flex h-full w-full items-center justify-center px-[clamp(16px,4vw,48px)]">
-              <div className="relative h-[min(88vh,900px)] min-h-[560px] w-full max-w-[1180px] min-[1400px]:max-w-[1400px] xl:min-h-[600px] min-[1400px]:min-h-[680px]">
+            <div className="flex h-full w-full items-center justify-center px-[clamp(16px,4vw,48px)] pt-[clamp(72px,9vh,96px)] pb-[clamp(16px,3vh,32px)]">
+              <div className="relative h-[min(72vh,780px)] min-h-[480px] w-full max-w-[1080px] min-[1400px]:max-w-[1240px] xl:min-h-[520px] min-[1400px]:min-h-[560px]">
                 {caseStudies.map((caseStudy, index) => (
                   <div
                     key={caseStudy.id}
@@ -319,6 +319,7 @@ function CaseStudiesStory() {
                     <CaseStudyCard
                       caseStudy={caseStudy}
                       className="h-full w-full max-w-none"
+                      pinned
                       shouldLoadImage={shouldLoadCaseStudyImage(index, activeIndex, sectionVisible)}
                     />
                   </div>
