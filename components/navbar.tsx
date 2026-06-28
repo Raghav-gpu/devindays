@@ -2,16 +2,44 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { cn } from "@/lib/utils";
 import { smoothScrollTo } from "@/lib/smooth-scroll";
+import { useEffect, useState } from "react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FAFAFA]/90 backdrop-blur-md border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <header
+      className={cn(
+        "fixed z-50 w-full transition-all duration-300 ease-in-out",
+        isScrolled ? "top-3 px-4 md:top-4 md:px-8" : "top-0 px-0"
+      )}
+    >
+      <nav
+        className={cn(
+          "transition-all duration-300 ease-in-out",
+          isScrolled
+            ? "mx-auto max-w-5xl rounded-2xl border border-gray-200/80 bg-white/95 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
+            : "w-full border-b border-gray-200 bg-[#FAFAFA]/90 backdrop-blur-md"
+        )}
+      >
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
           <Link href="/" className="text-xl font-semibold text-gray-900">
             DevInDays
           </Link>
@@ -191,7 +219,8 @@ export function Navbar() {
             </div>
           </nav>
         )}
-      </div>
-    </nav>
+        </div>
+      </nav>
+    </header>
   );
 }

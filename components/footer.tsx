@@ -151,7 +151,7 @@ export function Footer() {
 
         <div className="border-t border-gray-200 pt-8 text-center">
           <p className="text-sm text-gray-600 font-light">
-            © 2024 DevInDays. All rights reserved.
+            © 2026 DevInDays. All rights reserved.
           </p>
         </div>
       </div>
