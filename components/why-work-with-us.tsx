@@ -2,8 +2,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 const benefits = [
   {
-    title: "We're not an agency factory",
-    description: "We take limited projects so timelines don't slip.",
+    title: "Strictly Capped Bandwidth",
+    description:
+      "We cap our engineering pod at 6 active deployments per month. This ensures our Lead Engineer maintains strict oversight over code reviews, architecture, and flawless delivery.",
   },
   {
     title: "We think like founders",

@@ -1,36 +1,32 @@
-"use client";
-
+import { ScrollLink } from "@/components/scroll-link";
 import Link from "next/link";
-import { smoothScrollTo } from "@/lib/smooth-scroll";
 
 export function Footer() {
   return (
-    <footer className="border-t border-gray-200 py-12 px-6 lg:px-8 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+    <footer className="border-t border-gray-200 bg-white px-6 py-12 lg:px-8">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-8 grid gap-8 md:grid-cols-4">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              DevInDays
-            </h3>
-            <p className="text-sm text-gray-600 font-light">
+            <h2 className="mb-4 text-lg font-semibold text-gray-900">DevInDays</h2>
+            <p className="text-sm font-light text-gray-600">
               We build apps for founders. Fast, affordable, and without wasting time.
             </p>
-            <p className="text-sm text-gray-600 font-light mt-4">
+            <p className="mt-4 text-sm font-light text-gray-600">
               Email:{" "}
               <a
                 href="mailto:contact@devindays.com"
-                className="hover:text-gray-900 underline"
+                className="underline hover:text-gray-900"
               >
                 contact@devindays.com
               </a>
             </p>
-            <p className="text-sm text-gray-600 font-light mt-2">
+            <p className="mt-2 text-sm font-light text-gray-600">
               WhatsApp:{" "}
               <a
                 href="https://wa.me/919315735371"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-gray-900 underline"
+                className="underline hover:text-gray-900"
               >
                 +91 93157 35371
               </a>
@@ -38,92 +34,68 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Services</h4>
+            <h3 className="mb-4 text-sm font-semibold text-gray-900">Services</h3>
             <ul className="space-y-2">
               <li>
-                <a 
-                  href="#what-we-do" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    smoothScrollTo("what-we-do");
-                  }}
-                  className="text-sm text-gray-600 hover:text-gray-900 font-light"
+                <ScrollLink
+                  targetId="what-we-do"
+                  className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   What We Do
-                </a>
+                </ScrollLink>
               </li>
               <li>
-                <a 
-                  href="#pricing" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    smoothScrollTo("pricing");
-                  }}
-                  className="text-sm text-gray-600 hover:text-gray-900 font-light"
+                <ScrollLink
+                  targetId="pricing"
+                  className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   Pricing
-                </a>
+                </ScrollLink>
               </li>
               <li>
-                <a 
-                  href="#how-it-works" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    smoothScrollTo("how-it-works");
-                  }}
-                  className="text-sm text-gray-600 hover:text-gray-900 font-light"
+                <ScrollLink
+                  targetId="how-it-works"
+                  className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   How It Works
-                </a>
+                </ScrollLink>
               </li>
               <li>
-                <a 
-                  href="#projects" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    smoothScrollTo("projects");
-                  }}
-                  className="text-sm text-gray-600 hover:text-gray-900 font-light"
+                <ScrollLink
+                  targetId="projects"
+                  className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   Projects
-                </a>
+                </ScrollLink>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Company</h4>
+            <h3 className="mb-4 text-sm font-semibold text-gray-900">Company</h3>
             <ul className="space-y-2">
               <li>
-                <a 
-                  href="#why-us" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    smoothScrollTo("why-us");
-                  }}
-                  className="text-sm text-gray-600 hover:text-gray-900 font-light"
+                <ScrollLink
+                  targetId="why-us"
+                  className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   Why Work With Us
-                </a>
+                </ScrollLink>
               </li>
               <li>
-                <a 
-                  href="#contact" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    smoothScrollTo("contact");
-                  }}
-                  className="text-sm text-gray-600 hover:text-gray-900 font-light"
+                <ScrollLink
+                  targetId="contact"
+                  className="text-sm font-light text-gray-600 hover:text-gray-900"
                 >
                   Contact
-                </a>
+                </ScrollLink>
               </li>
               <li>
                 <a
                   href="https://wa.me/919315735371"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-gray-600 hover:text-gray-900 font-light"
+                  className="text-sm font-light text-gray-600 hover:text-gray-900"
                   aria-label="Open WhatsApp to get a quote"
                 >
                   Get a Quote
@@ -133,15 +105,15 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Legal</h4>
+            <h3 className="mb-4 text-sm font-semibold text-gray-900">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/privacy" className="text-sm text-gray-600 hover:text-gray-900 font-light">
+                <Link href="/privacy" className="text-sm font-light text-gray-600 hover:text-gray-900">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-sm text-gray-600 hover:text-gray-900 font-light">
+                <Link href="/terms" className="text-sm font-light text-gray-600 hover:text-gray-900">
                   Terms of Service
                 </Link>
               </li>
@@ -150,9 +122,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-200 pt-8 text-center">
-          <p className="text-sm text-gray-600 font-light">
-            © 2026 DevInDays. All rights reserved.
-          </p>
+          <p className="text-sm font-light text-gray-600">© 2026 DevInDays. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -74,7 +74,6 @@ export function ContactSection() {
                     href="https://wa.me/919315735371"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Open WhatsApp to talk about your project"
                   >
                     Talk on WhatsApp
                   </a>

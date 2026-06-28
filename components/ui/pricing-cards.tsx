@@ -219,7 +219,6 @@ function PricingTierCard({ tier, index }: { tier: PricingTier; index: number }) 
                 href={tier.ctaHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={tier.ctaAriaLabel}
                 className="inline-flex h-12 w-full items-center justify-center gap-2"
               >
                 <span className="truncate">{tier.ctaLabel}</span>

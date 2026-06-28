@@ -35,7 +35,7 @@ export const caseStudies: CaseStudy[] = [
       "Secure Online Payments",
       "Live Location & Notifications",
     ],
-    mockup: "/mockups/mockup-01.png",
+    mockup: "/mockups/mockup-01.webp",
     accentColor: "rgba(249, 115, 22, 0.18)",
     platforms: ["Android", "iOS", "Flutter", "Firebase", "Live"],
     playStoreUrl:
@@ -62,7 +62,7 @@ export const caseStudies: CaseStudy[] = [
       "Secure Chat & Interests",
       "Privacy-first Experience",
     ],
-    mockup: "/mockups/mockup-02.png",
+    mockup: "/mockups/mockup-02.webp",
     accentColor: "rgba(236, 72, 153, 0.18)",
     platforms: ["Android", "iOS", "Flutter", "Firebase", "Live"],
     playStoreUrl:
@@ -89,7 +89,7 @@ export const caseStudies: CaseStudy[] = [
       "Delivery Management",
       "Admin Dashboard",
     ],
-    mockup: "/mockups/mockup-03.png",
+    mockup: "/mockups/mockup-03.webp",
     accentColor: "rgba(59, 130, 246, 0.18)",
     platforms: ["Android", "iOS", "Flutter", "Firebase", "Live"],
     // Add the official Play Store URL once the app is published.

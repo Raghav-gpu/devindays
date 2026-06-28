@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const alt = "DevInDays - Fast App Development for Founders";
@@ -9,6 +11,9 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
+  const logoBuffer = await readFile(join(process.cwd(), "public/logo.png"));
+  const logoSrc = `data:image/png;base64,${logoBuffer.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -20,11 +25,10 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: 80,
+          padding: 64,
           position: "relative",
         }}
       >
-        {/* Subtle dotted pattern background */}
         <div
           style={{
             position: "absolute",
@@ -37,8 +41,7 @@ export default async function Image() {
             backgroundSize: "24px 24px",
           }}
         />
-        
-        {/* Main content */}
+
         <div
           style={{
             display: "flex",
@@ -49,52 +52,43 @@ export default async function Image() {
             textAlign: "center",
           }}
         >
-          {/* Logo/Brand */}
-          <div
-            style={{
-              fontSize: 120,
-              fontWeight: 900,
-              marginBottom: 30,
-              color: "#111827",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            D
-          </div>
-          
-          {/* Main headline */}
+          <img
+            src={logoSrc}
+            alt="DevInDays logo"
+            width={160}
+            height={160}
+            style={{ marginBottom: 32 }}
+          />
+
           <div
             style={{
               fontSize: 64,
               fontWeight: 300,
               color: "#111827",
-              marginBottom: 20,
+              marginBottom: 16,
               maxWidth: 1000,
               lineHeight: 1.2,
             }}
           >
             Build Your MVP in 2–3 Weeks
           </div>
-          
-          {/* Subheadline */}
+
           <div
             style={{
               fontSize: 36,
               fontWeight: 400,
               color: "#111827",
-              marginBottom: 30,
+              marginBottom: 28,
               maxWidth: 900,
             }}
           >
             Without Hiring a Tech Team
           </div>
-          
-          {/* Key points */}
+
           <div
             style={{
               display: "flex",
               gap: 40,
-              marginTop: 20,
               fontSize: 28,
               color: "#4B5563",
               fontWeight: 300,
@@ -114,4 +108,3 @@ export default async function Image() {
     }
   );
 }
-

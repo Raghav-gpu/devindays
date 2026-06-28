@@ -2,16 +2,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 const founderTypes = [
   {
-    title: "Early-stage founders",
-    description: "You have an idea but no tech team. You want an MVP that actually works, not a demo that breaks.",
+    title: "Domain Experts & Operators",
+    description:
+      "You know your industry, we know the architecture. We translate your business requirements into scalable technical infrastructure.",
   },
   {
-    title: "Non-technical founders",
-    description: "You want clarity, not jargon. Clear timelines, honest feedback, and full transparency.",
+    title: "Funded & Bootstrapped Startups",
+    description:
+      "You need market validation without sacrificing the codebase. We build MVPs on robust foundations (Node.js/Supabase) so you don't have to rewrite everything when you scale.",
   },
   {
-    title: "Busy founders",
-    description: "You don't want endless meetings or delays. You want progress every week and a launch date you can trust.",
+    title: "Scaling Platforms",
+    description:
+      "You need reliable execution, not daily micromanagement. We operate on strict sprint cycles with transparent CI/CD pipelines and clear delivery milestones.",
   },
 ];
 

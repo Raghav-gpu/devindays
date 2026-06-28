@@ -19,7 +19,7 @@ export const projects: Project[] = [
     featured: true,
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.krexhe.app",
     appStoreUrl: null,
-    images: ["/mockups/mockup-04.png"],
+    images: ["/mockups/mockup-04.webp"],
   },
 
   {
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     featured: false,
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.homeyfixit.vendor",
     appStoreUrl: null,
-    images: ["/mockups/mockup-05.png"],
+    images: ["/mockups/mockup-05.webp"],
   },
 
   {
@@ -43,7 +43,7 @@ export const projects: Project[] = [
     featured: false,
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.sailor.rider",
     appStoreUrl: null,
-    images: ["/mockups/mockup-06.png"],
+    images: ["/mockups/mockup-06.webp"],
   },
 
   {
@@ -55,7 +55,7 @@ export const projects: Project[] = [
     featured: false,
     playStoreUrl: null,
     appStoreUrl: null,
-    images: ["/mockups/mockup-07.png"],
+    images: ["/mockups/mockup-07.webp"],
   },
 
   {
@@ -67,7 +67,7 @@ export const projects: Project[] = [
     featured: false,
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.navnirvana.app",
     appStoreUrl: null,
-    images: ["/mockups/mockup-08.png"],
+    images: ["/mockups/mockup-08.webp"],
   },
 
   {
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     featured: false,
     playStoreUrl: null,
     appStoreUrl: null,
-    images: ["/mockups/mockup-09.png"],
+    images: ["/mockups/mockup-09.webp"],
   },
 
   {
@@ -91,6 +91,6 @@ export const projects: Project[] = [
     featured: false,
     playStoreUrl: null,
     appStoreUrl: null,
-    images: ["/mockups/mockup-10.png"],
+    images: ["/mockups/mockup-10.webp"],
   },
 ];

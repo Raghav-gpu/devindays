@@ -3,9 +3,7 @@
 import { CaseStudyCard } from "@/components/case-study-card";
 import { Badge } from "@/components/ui/badge";
 import { caseStudies } from "@/constants/case-studies";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const HOLD_RATIO = 0.3;
 const TRANSITION_RATIO = 1 - HOLD_RATIO;
@@ -13,34 +11,22 @@ const SCRUB_AMOUNT = 0.9;
 const PIN_VIEWPORT_RATIO = 1.3;
 const MOCKUP_ANIM_DURATION = 0.7;
 
+let gsapRegistered = false;
+
 function getCardMockup(card: HTMLElement | null | undefined) {
   return card?.querySelector<HTMLElement>("[data-case-mockup]") ?? null;
-}
-
-function setMockupState(mockup: HTMLElement | null, active: boolean) {
-  if (!mockup) {
-    return;
-  }
-
-  gsap.set(mockup, {
-    y: active ? 0 : 40,
-    opacity: active ? 1 : 0,
-    scale: active ? 1 : 0.96,
-    transformOrigin: "center center",
-    force3D: true,
-  });
 }
 
 function CaseStudiesHeader() {
   return (
     <div className="mb-[clamp(40px,6vw,64px)] text-center">
-      <Badge variant="outline" className="mb-4 font-light text-gray-900 border-gray-300">
+      <Badge variant="outline" className="mb-4 border-gray-300 font-light text-gray-900">
         Case Studies
       </Badge>
-      <h2 className="mb-4 font-light text-gray-900 text-[clamp(2.125rem,4vw,3.5rem)] leading-tight">
+      <h2 className="mb-4 text-[clamp(2.125rem,4vw,3.5rem)] leading-tight font-light text-gray-900">
         Apps we shipped fast
       </h2>
-      <p className="mx-auto max-w-2xl font-light text-gray-600 text-[clamp(1rem,1.5vw,1.25rem)] leading-relaxed">
+      <p className="mx-auto max-w-2xl text-[clamp(1rem,1.5vw,1.25rem)] leading-relaxed font-light text-gray-600">
         Real products built for founders — from MVP to live users.
       </p>
     </div>
@@ -53,13 +39,26 @@ function CaseStudiesStaticList() {
       <div className="mx-auto w-full max-w-[1400px]">
         <CaseStudiesHeader />
         <div className="flex flex-col gap-[clamp(32px,5vw,48px)]">
-          {caseStudies.map((caseStudy) => (
-            <CaseStudyCard key={caseStudy.id} caseStudy={caseStudy} />
+          {caseStudies.map((caseStudy, index) => (
+            <CaseStudyCard
+              key={caseStudy.id}
+              caseStudy={caseStudy}
+              priority={index === 0}
+              shouldLoadImage
+            />
           ))}
         </div>
       </div>
     </section>
   );
+}
+
+function shouldLoadCaseStudyImage(index: number, activeIndex: number, sectionVisible: boolean) {
+  if (!sectionVisible) {
+    return index === 0;
+  }
+
+  return Math.abs(index - activeIndex) <= 1;
 }
 
 function CaseStudiesStory() {
@@ -68,165 +67,233 @@ function CaseStudiesStory() {
   const desktopPinRef = useRef<HTMLDivElement>(null);
   const desktopCardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mobileCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [sectionVisible, setSectionVisible] = useState(false);
 
-  useLayoutEffect(() => {
-    if (!sectionRef.current) {
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) {
       return;
     }
 
-    gsap.registerPlugin(ScrollTrigger);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setSectionVisible(entry.isIntersecting);
+      },
+      { rootMargin: "400px 0px", threshold: 0.01 }
+    );
 
-    const mm = gsap.matchMedia();
+    observer.observe(section);
 
-    mm.add("(min-width: 1024px)", () => {
-      if (
-        !desktopTrackRef.current ||
-        !desktopPinRef.current ||
-        caseStudies.length <= 1
-      ) {
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!sectionRef.current || !sectionVisible) {
+      return;
+    }
+
+    let cancelled = false;
+
+    async function setupAnimations() {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
+
+      if (cancelled || !sectionRef.current) {
         return;
       }
 
-      const cards = desktopCardRefs.current.filter(Boolean) as HTMLDivElement[];
-
-      if (cards.length <= 1) {
-        return;
+      if (!gsapRegistered) {
+        gsap.registerPlugin(ScrollTrigger);
+        gsapRegistered = true;
       }
 
-      const segmentScroll = window.innerHeight * PIN_VIEWPORT_RATIO;
-      const endDistance = (cards.length - 1) * segmentScroll;
+      const setMockupState = (mockup: HTMLElement | null, active: boolean) => {
+        if (!mockup) {
+          return;
+        }
 
-      cards.forEach((card, index) => {
-        gsap.set(card, {
-          yPercent: index === 0 ? 0 : 120,
-          scale: index === 0 ? 1 : 0.98,
-          opacity: index === 0 ? 1 : 0.95,
+        gsap.set(mockup, {
+          y: active ? 0 : 40,
+          opacity: active ? 1 : 0,
+          scale: active ? 1 : 0.96,
           transformOrigin: "center center",
           force3D: true,
         });
+      };
 
-        setMockupState(getCardMockup(card), index === 0);
-      });
+      const mm = gsap.matchMedia();
 
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: desktopTrackRef.current,
-          start: "top top",
-          end: `+=${endDistance}`,
-          pin: desktopPinRef.current,
-          scrub: SCRUB_AMOUNT,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
+      mm.add("(min-width: 1024px)", () => {
+        if (
+          !desktopTrackRef.current ||
+          !desktopPinRef.current ||
+          caseStudies.length <= 1
+        ) {
+          return;
+        }
 
-      for (let index = 1; index < cards.length; index += 1) {
-        const segmentStart = index - 1;
-        const transitionStart = segmentStart + HOLD_RATIO;
-        const mockup = getCardMockup(cards[index]);
+        const cards = desktopCardRefs.current.filter(Boolean) as HTMLDivElement[];
 
-        timeline.to(
-          cards[index],
-          {
-            yPercent: 0,
-            scale: 1,
-            opacity: 1,
-            duration: TRANSITION_RATIO,
-            ease: "power2.out",
+        if (cards.length <= 1) {
+          return;
+        }
+
+        const segmentScroll = window.innerHeight * PIN_VIEWPORT_RATIO;
+        const endDistance = (cards.length - 1) * segmentScroll;
+
+        cards.forEach((card, index) => {
+          gsap.set(card, {
+            yPercent: index === 0 ? 0 : 120,
+            scale: index === 0 ? 1 : 0.98,
+            opacity: index === 0 ? 1 : 0.95,
+            transformOrigin: "center center",
+            force3D: true,
+          });
+
+          setMockupState(getCardMockup(card), index === 0);
+        });
+
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: desktopTrackRef.current,
+            start: "top top",
+            end: `+=${endDistance}`,
+            pin: desktopPinRef.current,
+            scrub: SCRUB_AMOUNT,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const nextIndex = Math.min(
+                caseStudies.length - 1,
+                Math.max(0, Math.round(self.progress * (caseStudies.length - 1)))
+              );
+              setActiveIndex(nextIndex);
+            },
           },
-          transitionStart
-        );
+        });
 
-        timeline.to(
-          cards[index - 1],
-          {
-            scale: 0.97,
-            opacity: 0.9,
-            duration: TRANSITION_RATIO,
-            ease: "power2.out",
-          },
-          transitionStart
-        );
+        for (let index = 1; index < cards.length; index += 1) {
+          const segmentStart = index - 1;
+          const transitionStart = segmentStart + HOLD_RATIO;
+          const mockup = getCardMockup(cards[index]);
 
-        if (mockup) {
           timeline.to(
-            mockup,
+            cards[index],
             {
-              y: 0,
-              opacity: 1,
+              yPercent: 0,
               scale: 1,
-              duration: MOCKUP_ANIM_DURATION,
+              opacity: 1,
+              duration: TRANSITION_RATIO,
               ease: "power2.out",
             },
             transitionStart
           );
-        }
-      }
-    });
 
-    mm.add("(max-width: 1023px)", () => {
-      const cards = mobileCardRefs.current.filter(Boolean) as HTMLDivElement[];
-
-      cards.forEach((card) => {
-        const mockup = getCardMockup(card);
-
-        gsap.fromTo(
-          card,
-          {
-            y: 40,
-            opacity: 0,
-            force3D: true,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 88%",
-              end: "top 55%",
-              scrub: SCRUB_AMOUNT,
+          timeline.to(
+            cards[index - 1],
+            {
+              scale: 0.97,
+              opacity: 0.9,
+              duration: TRANSITION_RATIO,
+              ease: "power2.out",
             },
-          }
-        );
+            transitionStart
+          );
 
-        if (mockup) {
+          if (mockup) {
+            timeline.to(
+              mockup,
+              {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: MOCKUP_ANIM_DURATION,
+                ease: "power2.out",
+              },
+              transitionStart
+            );
+          }
+        }
+      });
+
+      mm.add("(max-width: 1023px)", () => {
+        const cards = mobileCardRefs.current.filter(Boolean) as HTMLDivElement[];
+
+        cards.forEach((card, index) => {
+          const mockup = getCardMockup(card);
+
           gsap.fromTo(
-            mockup,
+            card,
             {
               y: 40,
               opacity: 0,
-              scale: 0.96,
               force3D: true,
             },
             {
               y: 0,
               opacity: 1,
-              scale: 1,
               ease: "power2.out",
               scrollTrigger: {
                 trigger: card,
                 start: "top 88%",
                 end: "top 55%",
                 scrub: SCRUB_AMOUNT,
+                onEnter: () => setActiveIndex(index),
               },
             }
           );
-        }
+
+          if (mockup) {
+            gsap.fromTo(
+              mockup,
+              {
+                y: 40,
+                opacity: 0,
+                scale: 0.96,
+                force3D: true,
+              },
+              {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top 88%",
+                  end: "top 55%",
+                  scrub: SCRUB_AMOUNT,
+                },
+              }
+            );
+          }
+        });
       });
-    });
 
-    const handleResize = () => {
-      ScrollTrigger.refresh();
-    };
+      const handleResize = () => {
+        ScrollTrigger.refresh();
+      };
 
-    window.addEventListener("resize", handleResize);
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+        mm.revert();
+      };
+    }
+
+    const cleanupPromise = setupAnimations();
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      mm.revert();
+      cancelled = true;
+      cleanupPromise.then((cleanup) => cleanup?.());
     };
-  }, []);
+  }, [sectionVisible]);
 
   return (
     <section ref={sectionRef} className="overflow-x-clip bg-white">
@@ -250,7 +317,12 @@ function CaseStudiesStory() {
                     className="absolute inset-0 will-change-transform"
                     style={{ zIndex: index + 1 }}
                   >
-                    <CaseStudyCard caseStudy={caseStudy} className="h-full w-full max-w-none" />
+                    <CaseStudyCard
+                      caseStudy={caseStudy}
+                      className="h-full w-full max-w-none"
+                      priority={index === 0 && sectionVisible}
+                      shouldLoadImage={shouldLoadCaseStudyImage(index, activeIndex, sectionVisible)}
+                    />
                   </div>
                 ))}
               </div>
@@ -273,7 +345,11 @@ function CaseStudiesStory() {
                 }}
                 className="will-change-transform"
               >
-                <CaseStudyCard caseStudy={caseStudy} />
+                <CaseStudyCard
+                  caseStudy={caseStudy}
+                  priority={index === 0 && sectionVisible}
+                  shouldLoadImage={shouldLoadCaseStudyImage(index, activeIndex, sectionVisible)}
+                />
               </div>
             ))}
           </div>
