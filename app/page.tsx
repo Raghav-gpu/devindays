@@ -11,10 +11,11 @@ import { RiskReversal } from "@/components/risk-reversal";
 import { WhyWorkWithUs } from "@/components/why-work-with-us";
 import { FounderMoment } from "@/components/founder-moment";
 import { FounderMessage } from "@/components/founder-message";
+import FAQSection from "@/components/faq-section";
 import {
   DeferredFocusFlowCaseStudy,
-  DeferredProjectsSection,
 } from "@/components/deferred-below-fold";
+import { ProjectsSection } from "@/components/projects-section";
 
 const PricingSection = dynamic(
   () => import("@/components/pricing-section").then((mod) => mod.PricingSection),
@@ -22,12 +23,6 @@ const PricingSection = dynamic(
 );
 
 const FocusFlowCaseStudy = DeferredFocusFlowCaseStudy;
-
-const ProjectsSection = DeferredProjectsSection;
-
-const FAQSection = dynamic(() => import("@/components/faq-section"), {
-  loading: () => <SectionPlaceholder minHeight="700px" />,
-});
 
 const ContactSection = dynamic(
   () => import("@/components/contact-section").then((mod) => mod.ContactSection),
@@ -44,7 +39,7 @@ function SectionPlaceholder({ minHeight }: { minHeight: string }) {
     <div
       aria-hidden="true"
       className="w-full"
-      style={{ minHeight, contentVisibility: "auto", containIntrinsicSize: `auto ${minHeight}` }}
+      style={{ minHeight }}
     />
   );
 }
@@ -74,15 +69,11 @@ export default function Home() {
         <Suspense fallback={<SectionPlaceholder minHeight="1200px" />}>
           <FocusFlowCaseStudy />
         </Suspense>
-        <Suspense fallback={<SectionPlaceholder minHeight="800px" />}>
-          <ProjectsSection />
-        </Suspense>
+        <ProjectsSection />
         <WhyWorkWithUs />
         <FounderMoment />
         <FounderMessage />
-        <Suspense fallback={<SectionPlaceholder minHeight="700px" />}>
-          <FAQSection />
-        </Suspense>
+        <FAQSection />
         <Suspense fallback={<SectionPlaceholder minHeight="600px" />}>
           <ContactSection />
         </Suspense>

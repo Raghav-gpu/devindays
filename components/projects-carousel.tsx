@@ -36,7 +36,20 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
   const [slideCount, setSlideCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [enableWheelGestures, setEnableWheelGestures] = useState(false);
   const [loadedSlides, setLoadedSlides] = useState<Set<number>>(() => new Set());
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const updateWheelGestures = () => setEnableWheelGestures(mediaQuery.matches);
+
+    updateWheelGestures();
+    mediaQuery.addEventListener("change", updateWheelGestures);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateWheelGestures);
+    };
+  }, []);
 
   useEffect(() => {
     const node = containerRef.current;
@@ -109,7 +122,11 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
       <div className="relative overflow-hidden">
         <Carousel
           setApi={setApi}
-          plugins={isPaused ? [] : [WheelGesturesPlugin({ forceWheelAxis: "x" })]}
+          plugins={
+            isPaused || !enableWheelGestures
+              ? []
+              : [WheelGesturesPlugin({ forceWheelAxis: "x" })]
+          }
           opts={{
             align: "center",
             loop: true,

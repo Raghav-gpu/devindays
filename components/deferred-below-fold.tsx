@@ -7,7 +7,7 @@ function SectionPlaceholder({ minHeight }: { minHeight: string }) {
     <div
       aria-hidden="true"
       className="w-full"
-      style={{ minHeight, contentVisibility: "auto", containIntrinsicSize: `auto ${minHeight}` }}
+      style={{ minHeight }}
     />
   );
 }
@@ -15,9 +15,4 @@ function SectionPlaceholder({ minHeight }: { minHeight: string }) {
 export const DeferredFocusFlowCaseStudy = dynamic(
   () => import("@/components/focusflow-case-study").then((mod) => mod.FocusFlowCaseStudy),
   { loading: () => <SectionPlaceholder minHeight="1200px" />, ssr: false }
-);
-
-export const DeferredProjectsSection = dynamic(
-  () => import("@/components/projects-section").then((mod) => mod.ProjectsSection),
-  { loading: () => <SectionPlaceholder minHeight="800px" />, ssr: false }
 );

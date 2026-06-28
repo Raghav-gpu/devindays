@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PortfolioLink } from "@/components/portfolio-button";
 
 export function Footer() {
   return (
@@ -66,6 +67,9 @@ export function Footer() {
                 >
                   Projects
                 </a>
+              </li>
+              <li>
+                <PortfolioLink />
               </li>
             </ul>
           </div>

@@ -165,7 +165,7 @@ function CaseStudiesStory() {
             end: `+=${endDistance}`,
             pin: desktopPinRef.current,
             scrub: SCRUB_AMOUNT,
-            anticipatePin: 1,
+            anticipatePin: 0,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               const nextIndex = Math.min(
@@ -275,10 +275,11 @@ function CaseStudiesStory() {
       });
 
       const handleResize = () => {
-        ScrollTrigger.refresh();
+        ScrollTrigger.refresh(true);
       };
 
       window.addEventListener("resize", handleResize);
+      ScrollTrigger.refresh(true);
 
       return () => {
         window.removeEventListener("resize", handleResize);
