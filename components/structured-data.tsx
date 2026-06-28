@@ -4,7 +4,7 @@ export function StructuredData() {
     "@type": "Organization",
     name: "DevInDays",
     url: "https://devindays.com",
-    email: "raghav@vaydenfoundry.com",
+    email: "contact@devindays.com",
     description: "Fast app development for founders. Build your MVP in 2–3 weeks starting at ₹40,000.",
     address: {
       "@type": "PostalAddress",

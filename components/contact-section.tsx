@@ -71,7 +71,7 @@ export function ContactSection() {
                   asChild
                 >
                   <a
-                    href="https://wa.link/lw7sw2"
+                    href="https://wa.me/919315735371"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open WhatsApp to talk about your project"
@@ -81,8 +81,8 @@ export function ContactSection() {
                 </Button>
                 <p className="text-center text-sm text-gray-500 font-light mt-4">
                   Or email us at{" "}
-                  <a href="mailto:raghav@vaydenfoundry.com" className="text-gray-900 hover:underline">
-                    raghav@vaydenfoundry.com
+                  <a href="mailto:contact@devindays.com" className="text-gray-900 hover:underline">
+                    contact@devindays.com
                   </a>
                 </p>
               </div>

@@ -129,7 +129,7 @@ export default function PrivacyPage() {
                 If you have any questions about this Privacy Policy, please contact us at:
               </p>
               <p className="text-gray-600 font-light leading-relaxed mt-2">
-                Email: <a href="mailto:raghav@vaydenfoundry.com" className="text-gray-900 hover:underline">raghav@vaydenfoundry.com</a>
+                Email: <a href="mailto:contact@devindays.com" className="text-gray-900 hover:underline">contact@devindays.com</a>
               </p>
             </section>
           </div>

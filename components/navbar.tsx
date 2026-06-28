@@ -87,7 +87,7 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center">
             <Button size="sm" className="bg-gray-900 text-white hover:bg-gray-800" asChild>
-              <Link href="https://wa.me/919354120990" target="_blank">Build My MVP</Link>
+              <Link href="https://wa.me/919315735371" target="_blank">Build My MVP</Link>
             </Button>
           </div>
 
@@ -186,7 +186,7 @@ export function Navbar() {
             </a>
             <div className="pt-4">
               <Button size="sm" className="w-full bg-gray-900 text-white hover:bg-gray-800" asChild>
-                <Link href="https://wa.me/919354120990" target="_blank" aria-label="Open WhatsApp to build your MVP">Build My MVP</Link>
+                <Link href="https://wa.me/919315735371" target="_blank" aria-label="Open WhatsApp to build your MVP">Build My MVP</Link>
               </Button>
             </div>
           </nav>

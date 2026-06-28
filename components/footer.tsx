@@ -18,21 +18,21 @@ export function Footer() {
             <p className="text-sm text-gray-600 font-light mt-4">
               Email:{" "}
               <a
-                href="mailto:raghav@vaydenfoundry.com"
+                href="mailto:contact@devindays.com"
                 className="hover:text-gray-900 underline"
               >
-                raghav@vaydenfoundry.com
+                contact@devindays.com
               </a>
             </p>
             <p className="text-sm text-gray-600 font-light mt-2">
               WhatsApp:{" "}
               <a
-                href="https://wa.me/919354120990"
+                href="https://wa.me/919315735371"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-gray-900 underline"
               >
-                +91 93541 20990
+                +91 93157 35371
               </a>
             </p>
           </div>
@@ -120,7 +120,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://wa.me/919354120990"
+                  href="https://wa.me/919315735371"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-gray-600 hover:text-gray-900 font-light"
