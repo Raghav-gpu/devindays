@@ -13,7 +13,7 @@ export function StructuredData() {
     email: "contact@devindays.com",
     logo: `${BASE_URL}/logo.png`,
     description:
-      "Build your MVP. Build your MVP in 2–3 weeks starting at ₹40,000.",
+      "Build your MVP in 2–3 weeks.",
     address: {
       "@type": "PostalAddress",
       addressCountry: "IN",
@@ -98,8 +98,6 @@ export function StructuredData() {
       {
         "@type": "Offer",
         name: "MVP Build",
-        price: "80000",
-        priceCurrency: "INR",
         description: "Cross-platform mobile app development for MVPs",
       },
       {
@@ -123,8 +121,6 @@ export function StructuredData() {
       "Cross-platform mobile app development service for founders. MVPs delivered in 2–3 weeks with full code ownership.",
     offers: {
       "@type": "Offer",
-      price: "80000",
-      priceCurrency: "INR",
     },
     provider: {
       "@id": `${BASE_URL}/#organization`,

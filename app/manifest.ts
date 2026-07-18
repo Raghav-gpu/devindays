@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "DevInDays - Build your MVP",
     short_name: "DevInDays",
     description:
-      "Build your MVP in 2–3 weeks starting at ₹40,000. Fast, affordable app development for founders.",
+      "Build your MVP in 2-3 weeks. Fast, affordable app development for founders.",
     start_url: "/",
     display: "standalone",
     background_color: "#FAFAFA",

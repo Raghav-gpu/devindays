@@ -7,7 +7,7 @@ export const faqs: FAQ[] = [
   {
     question: "How much does an MVP usually cost?",
     answer:
-      "Most MVPs start at ₹40,000, depending on complexity. We scope your idea and provide a fixed quote within 24 hours.",
+      "Cost depends on complexity. We scope your idea and provide a fixed quote within 24 hours.",
   },
   {
     question: "What if I want changes mid-way?",

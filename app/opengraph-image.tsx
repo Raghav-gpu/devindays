@@ -99,7 +99,7 @@ export default async function Image() {
               fontWeight: 300,
             }}
           >
-            <div>Starting at ₹40,000</div>
+            <div>Scalable Architecture</div>
             <div>•</div>
             <div>Full Code Ownership</div>
             <div>•</div>

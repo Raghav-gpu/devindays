@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | DevInDays",
   },
   description:
-    "We build apps for founders. Fast, affordable, and without wasting time. Get a fully functional cross-platform app in 2–3 weeks starting at ₹40,000.",
+    "We build apps for founders. Fast, affordable, and without wasting time. Get a fully functional cross-platform app in 2-3 weeks.",
   keywords: [
     "app development",
     "MVP development",
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "https://devindays.com",
     siteName: "DevInDays",
-    title: "DevInDays - Build Your MVP in 2–3 Weeks",
+    title: "DevInDays - Build Your MVP in 2-3 Weeks",
     description:
-      "Fast, affordable app development for founders. Get a fully functional cross-platform app starting at ₹40,000. Clear scope, fixed timelines, full code ownership.",
+      "Fast, affordable app development for founders. Get a fully functional cross-platform app. Clear scope, fixed timelines, full code ownership.",
     images: [
       {
         url: "/opengraph-image",
@@ -66,9 +66,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DevInDays - Build Your MVP in 2–3 Weeks",
+    title: "DevInDays - Build Your MVP in 2-3 Weeks",
     description:
-      "Fast, affordable app development for founders. Get a fully functional cross-platform app starting at ₹40,000.",
+      "Fast, affordable app development for founders. Get a fully functional cross-platform app.",
     images: ["/twitter-image"],
     creator: "@devindays",
   },
