@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     deviceSizes: [480, 640, 768, 1024, 1200, 1440, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
-    qualities: [100],
+    // qualities: [100],
   },
   compress: true,
   poweredByHeader: false,
