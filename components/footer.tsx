@@ -16,6 +16,7 @@ export function Footer() {
               <a
                 href="mailto:contact@devindays.com"
                 className="underline hover:text-gray-900"
+                data-umami-event="CTA Click - Footer Email"
               >
                 contact@devindays.com
               </a>
@@ -27,6 +28,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline hover:text-gray-900"
+                data-umami-event="CTA Click - Footer WhatsApp"
               >
                 +91 93157 35371
               </a>
@@ -69,7 +71,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <PortfolioLink />
+                <PortfolioLink data-umami-event="CTA Click - Footer Portfolio" />
               </li>
             </ul>
           </div>
@@ -100,6 +102,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="text-sm font-light text-gray-600 hover:text-gray-900"
                   aria-label="Open WhatsApp to get a quote"
+                  data-umami-event="CTA Click - Footer"
                 >
                   Get a Quote
                 </a>

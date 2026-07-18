@@ -43,6 +43,7 @@ export function HeroSection() {
               href="https://wa.me/919315735371"
               target="_blank"
               rel="noopener noreferrer"
+              data-umami-event="CTA Click - Hero"
             >
               Build My MVP
             </Link>
@@ -52,6 +53,7 @@ export function HeroSection() {
             variant="outline"
             className="border-gray-300 px-12 text-gray-900 hover:bg-gray-50"
             targetId="how-it-works"
+            data-umami-event="CTA Click - Hero Secondary"
           >
             See How It Works
           </ScrollToButton>

@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import { AnalyticsInit } from "@/components/analytics-init";
 import { StructuredData } from "@/components/structured-data";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -106,6 +107,8 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <Script defer src="https://cloud.umami.is/script.js" data-website-id="79bb04f2-4d88-44dd-ad65-da40f8541c3b"></Script>
+
       </head>
       <body className={`${geistSans.variable} font-sans antialiased`}>
         <a

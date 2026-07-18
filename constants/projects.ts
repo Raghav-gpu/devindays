@@ -89,7 +89,7 @@ export const projects: Project[] = [
       "Modern dating platform focused on meaningful connections with a privacy-first experience.",
     badge: "Dating & Matching",
     featured: false,
-    playStoreUrl: null,
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.daterplat.app',
     appStoreUrl: null,
     images: ["/mockups/mockup-10.webp"],
   },

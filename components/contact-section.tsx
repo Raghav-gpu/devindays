@@ -74,13 +74,18 @@ export function ContactSection() {
                     href="https://wa.me/919315735371"
                     target="_blank"
                     rel="noopener noreferrer"
+                    data-umami-event="CTA Click - Contact"
                   >
                     Talk on WhatsApp
                   </a>
                 </Button>
                 <p className="text-center text-sm text-gray-500 font-light mt-4">
                   Or email us at{" "}
-                  <a href="mailto:contact@devindays.com" className="text-gray-900 hover:underline">
+                  <a
+                    href="mailto:contact@devindays.com"
+                    className="text-gray-900 hover:underline"
+                    data-umami-event="CTA Click - Contact Email"
+                  >
                     contact@devindays.com
                   </a>
                 </p>

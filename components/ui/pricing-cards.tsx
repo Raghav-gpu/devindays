@@ -21,6 +21,7 @@ type PricingTier = {
   ctaLabel: string;
   ctaHref: string;
   ctaAriaLabel: string;
+  umamiEvent: string;
   highlighted?: boolean;
   badge?: string;
 };
@@ -42,6 +43,7 @@ const pricingTiers: PricingTier[] = [
     ctaLabel: "Initiate MVP Build",
     ctaHref: "https://wa.me/919315735371",
     ctaAriaLabel: "Open WhatsApp to initiate MVP build",
+    umamiEvent: "CTA Click - Pricing MVP",
   },
   {
     title: "Full App Build",
@@ -60,6 +62,7 @@ const pricingTiers: PricingTier[] = [
     ctaLabel: "Request Technical Review",
     ctaHref: "https://wa.me/919315735371",
     ctaAriaLabel: "Open WhatsApp to request a technical review",
+    umamiEvent: "CTA Click - Pricing Full App",
     highlighted: true,
     badge: "Most Popular",
   },
@@ -80,6 +83,7 @@ const pricingTiers: PricingTier[] = [
     ctaLabel: "Discuss Architecture",
     ctaHref: "https://wa.me/919315735371",
     ctaAriaLabel: "Open WhatsApp to discuss architecture",
+    umamiEvent: "CTA Click - Pricing Custom",
   },
 ];
 
@@ -228,6 +232,7 @@ function PricingTierCard({ tier, index }: { tier: PricingTier; index: number }) 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-10 w-full items-center justify-center gap-1.5 sm:h-11 lg:h-9 xl:h-11 xl:gap-2"
+                data-umami-event={tier.umamiEvent}
               >
                 <span className="truncate">{tier.ctaLabel}</span>
                 <MoveRight className="h-3.5 w-3.5 shrink-0 lg:h-3 lg:w-3 xl:h-4 xl:w-4" aria-hidden="true" />

@@ -47,9 +47,10 @@ export function openPortfolio() {
 type PortfolioLinkProps = {
   className?: string;
   children?: ReactNode;
+  "data-umami-event"?: string;
 };
 
-export function PortfolioLink({ className, children }: PortfolioLinkProps) {
+export function PortfolioLink({ className, children, "data-umami-event": umamiEvent }: PortfolioLinkProps) {
   return (
     <button
       type="button"
@@ -59,6 +60,7 @@ export function PortfolioLink({ className, children }: PortfolioLinkProps) {
         className
       )}
       aria-label="View DevInDays portfolio PDF"
+      data-umami-event={umamiEvent}
     >
       {children ?? "View Portfolio"}
     </button>

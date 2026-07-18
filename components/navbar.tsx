@@ -92,6 +92,7 @@ export function Navbar() {
                   href="https://wa.me/919315735371"
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-umami-event="CTA Click - Navbar"
                 >
                   Build My MVP
                 </Link>
@@ -136,6 +137,7 @@ export function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={closeMenu}
+                    data-umami-event="CTA Click - Navbar Mobile"
                   >
                     Build My MVP
                   </Link>

@@ -19,7 +19,7 @@ export function ProjectsSection() {
         <ProjectsCarousel projects={projects} />
 
         <div className="mt-[clamp(32px,5vw,48px)] flex flex-col items-center gap-4 text-center">
-          <PortfolioButton />
+          <PortfolioButton data-umami-event="CTA Click - Projects Portfolio" />
           <p className="text-sm italic font-light text-gray-600">
             Live demo of apps available on request
           </p>
